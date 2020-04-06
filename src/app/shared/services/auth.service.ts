@@ -8,7 +8,7 @@ import { User } from 'src/app/data/user';
 })
 export class AuthService {
   hasLoggedInsubject = new BehaviorSubject(false);
-
+  userSubject= new BehaviorSubject(null);
   constructor(private router: Router) { }
 
   isLoggedIn() {
@@ -24,6 +24,7 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(user));
     //this.router.navigate(['/postlogin/dashboard']);
     this.hasLoggedInsubject.next(true);
+    this.userSubject.next(user);
   }
   logout() {
     this.hasLoggedInsubject.next(false);

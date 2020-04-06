@@ -1,5 +1,5 @@
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-  <app-header  [hasLoggedIn]="hasLoggedIn"></app-header>
+  <app-header [user]="user"  [hasLoggedIn]="hasLoggedIn"></app-header>
   <div class="app-main">    
       <app-side-nav [hasLoggedIn]="hasLoggedIn"></app-side-nav>
     <div class="app-main__outer" [ngClass]="{'side-nav-active': hasLoggedIn===false}">

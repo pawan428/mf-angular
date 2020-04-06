@@ -6,11 +6,11 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  user;
-  @Input()
-  hasLoggedIn;
+  @Input() user;
+  @Input() hasLoggedIn;
   constructor(private authService: AuthService) {
     this.user = this.authService.getCurrentUser();
+console.log('test')   
   }
 
   ngOnInit() {
