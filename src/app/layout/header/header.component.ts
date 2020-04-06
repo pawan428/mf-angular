@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { UtilityService } from 'src/app/shared/services/utility.service';
-import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

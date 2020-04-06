@@ -10,12 +10,11 @@ export class AuthService {
   hasLoggedInsubject = new BehaviorSubject(false);
 
   constructor(private router: Router) { }
+
   isLoggedIn() {
     let user = this.getCurrentUser();
-    console.log('isLoggedIn', user);
     this.hasLoggedInsubject.next(user ? true : false);
     return (user ? true : false);
-
   }
   login() {
     let user = new User();
