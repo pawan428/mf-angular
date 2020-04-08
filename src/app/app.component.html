@@ -1,13 +1,16 @@
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-  <app-header [user]="user"  [hasLoggedIn]="hasLoggedIn"></app-header>
-  <div class="app-main">    
-      <app-side-nav [hasLoggedIn]="hasLoggedIn"></app-side-nav>
+  <app-header [hasLoggedIn]="hasLoggedIn"></app-header>
+  <div class="app-main">
+    <app-side-nav [hasLoggedIn]="hasLoggedIn"></app-side-nav>
     <div class="app-main__outer" [ngClass]="{'side-nav-active': hasLoggedIn===false}">
       <div class="app-main__inner">
         <app-page-title [title]="title" [description]="description" [icon]="icon" *ngIf="hasLoggedIn"></app-page-title>
-        <router-outlet></router-outlet>        
+        <router-outlet></router-outlet>
+
       </div>
-      <app-footer></app-footer>
     </div>
+
   </div>
+  <app-footer></app-footer>
+
 </div>

@@ -12,11 +12,11 @@ const routes: Routes = [
   },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
-    data: { title: 'Dashboard', description:'Highly configurable boxes best used for showing numbers in an user friendly way.', icon:'metismenu-icon pe-7s-graph2' }
+    data: { title: 'Dashboard', description:'Highly configurable boxes best used for showing numbers in an user friendly way.', icon:'pe-7s-monitor' }
   },
   {
     path: 'portfolio', component: PortfolioComponent, canActivate: [AuthGuard],
-    data: { title: 'Portfolio', description:'helo description for portfolio', icon:'pe-7s-wallet icon-gradient bg-plum-plate' }
+    data: { title: 'Portfolio', description:'helo description for portfolio', icon:'pe-7s-portfolio' }
    },
   {
     path: 'home', component: PageLandingComponent,

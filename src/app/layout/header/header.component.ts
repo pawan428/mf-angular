@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
   @Input() hasLoggedIn;
   constructor(private authService: AuthService) {
     this.user = this.authService.getCurrentUser();
-console.log('test')   
+    console.log('test')
   }
 
   ngOnInit() {
