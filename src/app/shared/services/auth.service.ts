@@ -1,20 +1,26 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Router } from '@angular/router';
 import { User } from 'src/app/data/user';
+import { observable, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  hasLoggedInsubject = new BehaviorSubject(false);
-  userSubject= new BehaviorSubject(null);
+  // hasLoggedInsubject = new BehaviorSubject(false);
+  // currentUserSubject = new BehaviorSubject(User);
+  @Output() getLoggedInfo: EventEmitter<any> = new EventEmitter();
   constructor(private router: Router) { }
 
-  isLoggedIn() {
-    let user = this.getCurrentUser();
-    this.hasLoggedInsubject.next(user ? true : false);
-    return (user ? true : false);
+  isLoggedIn(): boolean {
+    let bool = false;
+    this.getCurrentUser().subscribe(user => {
+      this.getLoggedInfo.emit(user);
+      bool = user ? true : false
+    });
+    //this.hasLoggedInsubject.next(bool);
+    return bool;
   }
   login() {
     let user = new User();
@@ -23,27 +29,29 @@ export class AuthService {
     user.id = 1;
     localStorage.setItem('user', JSON.stringify(user));
     //this.router.navigate(['/postlogin/dashboard']);
-    this.hasLoggedInsubject.next(true);
-    this.userSubject.next(user);
+    // this.hasLoggedInsubject.next(true);
+    // this.getLoggedInfo.emit(user);
   }
   logout() {
-    this.hasLoggedInsubject.next(false);
     localStorage.removeItem('user');
+    //this.hasLoggedInsubject.next(false);
+    //this.currentUserSubject.next(null);
+    this.getLoggedInfo.emit(null);
+
     this.router.navigate(['/home']);
 
   }
-  getCurrentUser(): User {
+  getCurrentUser() {
+
     let user: User;
     let jsonstring = localStorage.getItem('user');
-    if (jsonstring) {
-      try {
-        user = JSON.parse(jsonstring);
-      } catch (error) {
-        console.error('unable to get user information')
-      }
-      return user;
-    }
-    return user;
+    user = JSON.parse(jsonstring);
+    const simpleObservable = new Observable((observer) => {
+      // observable execution
+      observer.next(user)
+      observer.complete()
+    })
+    return simpleObservable;
   }
 
 }
