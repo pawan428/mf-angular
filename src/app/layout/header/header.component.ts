@@ -6,13 +6,13 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  currentUser;
-  hasLoggedIn;
+  @Input() currentUser;
+  @Input() hasLoggedIn;
   constructor(private authService: AuthService) {
-    this.authService.getLoggedInfo.subscribe(user => {
-      this.currentUser = user;
-      this.hasLoggedIn = user ? true : false;
-    })
+    // this.authService.getLoggedInfo.subscribe(user => {
+    //   this.currentUser = user;
+    //   this.hasLoggedIn = user ? true : false;
+    // })
   }
 
   ngOnInit() {
@@ -22,6 +22,6 @@ export class HeaderComponent implements OnInit {
     console.log('logout');
   }
   ngOnDestroy() {
-    this.authService.getLoggedInfo.unsubscribe();
+    //this.authService.getLoggedInfo.unsubscribe();
   }
 }

@@ -19,7 +19,6 @@ export class AuthService {
       this.getLoggedInfo.emit(user);
       bool = user ? true : false
     });
-    //this.hasLoggedInsubject.next(bool);
     return bool;
   }
   login() {
@@ -28,21 +27,13 @@ export class AuthService {
     user.role = "Administrator";
     user.id = 1;
     localStorage.setItem('user', JSON.stringify(user));
-    //this.router.navigate(['/postlogin/dashboard']);
-    // this.hasLoggedInsubject.next(true);
-    // this.getLoggedInfo.emit(user);
   }
   logout() {
     localStorage.removeItem('user');
-    //this.hasLoggedInsubject.next(false);
-    //this.currentUserSubject.next(null);
     this.getLoggedInfo.emit(null);
-
     this.router.navigate(['/home']);
-
   }
   getCurrentUser() {
-
     let user: User;
     let jsonstring = localStorage.getItem('user');
     user = JSON.parse(jsonstring);
@@ -53,5 +44,4 @@ export class AuthService {
     })
     return simpleObservable;
   }
-
 }
