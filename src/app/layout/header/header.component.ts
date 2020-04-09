@@ -8,11 +8,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class HeaderComponent implements OnInit {
   @Input() currentUser;
   @Input() hasLoggedIn;
-  constructor(private authService: AuthService) {
-    // this.authService.getLoggedInfo.subscribe(user => {
-    //   this.currentUser = user;
-    //   this.hasLoggedIn = user ? true : false;
-    // })
+  constructor(private authService: AuthService) {   
   }
 
   ngOnInit() {

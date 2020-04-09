@@ -1,15 +1,12 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Router } from '@angular/router';
 import { User } from 'src/app/data/user';
-import { observable, Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // hasLoggedInsubject = new BehaviorSubject(false);
-  // currentUserSubject = new BehaviorSubject(User);
   @Output() getLoggedInfo: EventEmitter<any> = new EventEmitter();
   constructor(private router: Router) { }
 
@@ -36,13 +33,10 @@ export class AuthService {
   getCurrentUser() {
     let user: User;
     let jsonstring = localStorage.getItem('user');
-    user = JSON.parse(jsonstring);
     const simpleObservable = new Observable((observer) => {
-      // observable execution
-      if (!jsonstring) {
-        observer.next(null)
-      }
-      else
+      if (jsonstring)
+        user = JSON.parse(jsonstring);
+
       observer.next(user)
       observer.complete()
     })

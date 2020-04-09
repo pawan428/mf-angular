@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class SideNavComponent implements OnInit {
 
  @Input() hasLoggedIn;
-  constructor(private authService: AuthService) {
+  constructor() {
    
   }
   ngOnInit() {
