@@ -39,6 +39,10 @@ export class AuthService {
     user = JSON.parse(jsonstring);
     const simpleObservable = new Observable((observer) => {
       // observable execution
+      if (!jsonstring) {
+        observer.next(null)
+      }
+      else
       observer.next(user)
       observer.complete()
     })
