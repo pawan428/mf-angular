@@ -10,23 +10,23 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit ,OnDestroy {
+  // for page heading and title
   title;
   description;
   icon;
+  // used as inputs
   hasLoggedIn: boolean;
   currentUser: User;
   constructor(private router: Router, private authService: AuthService,
-    private titleService: Title, private activatedRoute: ActivatedRoute) {    
+    private titleService: Title, private activatedRoute: ActivatedRoute) {       
   }
   ngOnInit() {  
     this.authService.getLoggedInfo.subscribe(user => {
       this.currentUser = user;
       this.hasLoggedIn = user ? true : false;
-    })  
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/dashboard']);
-    }
+    })      
+    
     this.setPageTitle();
   }
 
@@ -49,6 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.icon = child.snapshot.data['icon'];
     });
   }
+  
   ngOnDestroy() {
     //this.authService.hasLoggedInsubject.unsubscribe();
   }

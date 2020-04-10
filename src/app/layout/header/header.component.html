@@ -1,6 +1,6 @@
 <div class="app-header header-shadow">
-    <div class="app-header__logo" >
-        <div class="logo-src"></div>
+    <div class="app-header__logo">
+        <a routerLink="/dashboard"><div class="logo-src"></div></a> 
         <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
@@ -92,13 +92,14 @@
                                 {{currentUser?.role}}
                             </div>
                         </div>
-                        
+
                     </div>
                     <ng-template #loginBlock>
+                        
                         <ul class="header-menu nav">
                             <li class="nav-item">
-                                <a href="javascript:void(0);" class="nav-link" routerLink="/auth/login">
-                                    <i class="nav-link-icon fa fa-key"> </i>
+                                <a href="javascript:void(0);" class=" btn btn-danger" routerLink="/auth/login">
+                                    <i class="nav-link-icon fa fa-user"> </i>&nbsp;
                                     Login
                                 </a>
                             </li>
