@@ -9,6 +9,7 @@ import { HoldingsComponent } from './pages/holdings/holdings.component';
 import { SchemeListComponent } from './shared/scheme-list/scheme-list.component';
 import { CommonModule } from '@angular/common';
 import { ColorChangerDirective } from './shared/color-changer.directive';
+import { ActionButtonComponent } from './shared/action-button/action-button.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
     PortfolioComponent,
     PortfolioDoughnutComponent,
     HoldingsComponent,
-    SchemeListComponent],
+    SchemeListComponent,
+    ActionButtonComponent],
   imports: [RouterModule.forRoot(routes),
     CommonModule],
   exports: [RouterModule]
