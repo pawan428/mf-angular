@@ -1,6 +1,8 @@
 <div class="app-header header-shadow">
     <div class="app-header__logo">
-        <a routerLink="/dashboard"><div class="logo-src"></div></a> 
+        <a routerLink="/dashboard">
+            <div class="logo-src"></div>
+        </a>
         <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
@@ -78,8 +80,10 @@
                                     <h6 tabindex="-1" class="dropdown-header">Header</h6>
                                     <button type="button" tabindex="0" class="dropdown-item">Actions</button>
                                     <div tabindex="-1" class="dropdown-divider"></div>
-                                    <button type="button" tabindex="0" class="dropdown-item"
-                                        (click)="logout()">Logout</button>
+                                    <div class="nav-item-btn nav-item">
+                                        <button type="button" tabindex="0"
+                                            class="btn-wide btn-shadow btn btn-danger btn-sm"
+                                            (click)="logout()">Logout</button></div>
                                 </div>
                             </div>
 
@@ -95,7 +99,7 @@
 
                     </div>
                     <ng-template #loginBlock>
-                        
+
                         <ul class="header-menu nav">
                             <li class="nav-item">
                                 <a href="javascript:void(0);" class=" btn btn-danger" routerLink="/auth/login">
