@@ -15,6 +15,7 @@ export class SchemeListComponent implements OnInit {
 
     this.holdingList = this.schemeList.map(a => Object.assign(
       {
+        id: a.id,
         schemeName: a.schemeName,
         investedAmount: a.investedAmount,
         cmv: a.cmv,

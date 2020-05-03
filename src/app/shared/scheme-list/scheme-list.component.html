@@ -6,7 +6,7 @@
                 <table class="mb-0 table">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <!-- <th>#</th> -->
                             <th>Scheme</th>
                             <th>Invested Amount</th>
                             <th>Current Value</th>
@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of holdingList">
-                            <th scope="row"><img width="42" src="assets/images/avatars/{{item.imgPath}}" alt=""></th>
+                            <!-- <th scope="row"><img width="42" src="assets/images/avatars/{{item.imgPath}}" alt=""></th> -->
                             <td><a [routerLink]="['/scheme-details', item.schemeName|urlFriendly]">{{item.schemeName}} </a></td>
                             <td>{{item.investedAmount}} </td>
                             <td>{{item.cmv}}</td>
