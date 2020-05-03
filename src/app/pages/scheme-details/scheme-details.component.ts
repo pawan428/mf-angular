@@ -13,12 +13,6 @@ export class SchemeDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-
-  //   this.activatedroute.data.subscribe(data => {
-  //     console.log(data);
-  //     data.title="hello";
-  //     let v=data;
-  // })
   }
 
 }

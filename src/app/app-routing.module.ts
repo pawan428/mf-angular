@@ -31,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'scheme-details/:name', component: SchemeDetailsComponent,canActivate: [AuthGuard],
-    data: { title: `Scheme-details`, description: 'details of scheme', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
+    data: { title: `Scheme Details`, description: 'Scheme Details', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
   },
   {
     path: 'home', component: PageLandingComponent,

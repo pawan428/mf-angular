@@ -4,7 +4,7 @@
     <app-side-nav [hasLoggedIn]="hasLoggedIn"></app-side-nav>
     <div class="app-main__outer" [ngClass]="{'side-nav-active': hasLoggedIn===false}">
       <div class="app-main__inner">
-        <app-page-title [title]="title" [description]="description" [icon]="icon" *ngIf="hasLoggedIn"></app-page-title>
+        <app-page-title [page]="page" *ngIf="hasLoggedIn"></app-page-title>
         <router-outlet></router-outlet>
       </div>
     </div>
