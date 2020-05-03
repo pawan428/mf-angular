@@ -36,9 +36,8 @@ export class AuthService {
     const simpleObservable = new Observable((observer) => {
       if (jsonstring)
         user = JSON.parse(jsonstring);
-
       observer.next(user)
-      observer.complete()
+      observer.complete()      
     })
     return simpleObservable;
   }

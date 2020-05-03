@@ -22,9 +22,7 @@ export class SignupComponent {
   ngOnInit() {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email],this.usernameValidator.checkUsername.bind(this.usernameValidator)],
-      //check for is valid or not
-      //username: ['', [Validators.required], this.customValidator.userNameValidator.bind(this.customValidator)],
+      email: ['', [Validators.required, Validators.email], this.usernameValidator.checkUsername.bind(this.usernameValidator)],
       password: ['', Validators.compose([Validators.required, this.customValidator.patternValidator()])],
       confirmPassword: ['', [Validators.required]],
     },
@@ -34,7 +32,7 @@ export class SignupComponent {
     );
   }
 
-  get registerFormControl() {
+  get f() {
     return this.registerForm.controls;
   }
 

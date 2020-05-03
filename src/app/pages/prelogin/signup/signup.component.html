@@ -11,7 +11,7 @@
                         <label>Name</label>
                         <input type="text" class="form-control" formControlName="name">
                         <span class="text-danger"
-                            *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.required">
+                            *ngIf="(f.name.touched || submitted) && f.name.errors?.required">
                             Name is required
                         </span>
                     </div>
@@ -19,15 +19,15 @@
                         <label>Email</label>
                         <input type="text" class="form-control" formControlName="email">
                         <span class="text-danger"
-                            *ngIf="(registerFormControl.email.touched || submitted) && registerFormControl.email.errors?.required">
+                            *ngIf="(f.email.touched || submitted) && f.email.errors?.required">
                             Email is required
                         </span>
                         <span class="text-danger"
-                            *ngIf="registerFormControl.email.touched && registerFormControl.email.errors?.email">
+                            *ngIf="f.email.touched && f.email.errors?.email">
                             Enter a valid email address
                         </span>
                         <span class="text-danger"
-                            *ngIf="registerFormControl.email.touched && registerFormControl.email.errors?.usernameInUse">
+                            *ngIf="f.email.touched && f.email.errors?.usernameInUse">
                             email address not available
                         </span>
                     </div>
@@ -36,11 +36,11 @@
                         <label>Password</label>
                         <input type="password" class="form-control" formControlName="password">
                         <span class="text-danger"
-                            *ngIf="(registerFormControl.password.touched || submitted) && registerFormControl.password.errors?.required">
+                            *ngIf="(f.password.touched || submitted) && f.password.errors?.required">
                             Password is required
                         </span>
                         <span class="text-danger"
-                            *ngIf="registerFormControl.password.touched && registerFormControl.password.errors?.invalidPassword">
+                            *ngIf="f.password.touched && f.password.errors?.invalidPassword">
                             Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
                             letter and 1 number
                         </span>
@@ -49,11 +49,11 @@
                         <label>Confirm Password</label>
                         <input type="password" class="form-control" formControlName="confirmPassword">
                         <span class="text-danger"
-                            *ngIf="(registerFormControl.confirmPassword.touched || submitted)&& registerFormControl.confirmPassword.errors?.required">
+                            *ngIf="(f.confirmPassword.touched || submitted)&& f.confirmPassword.errors?.required">
                             Confirm Password is required
                         </span>
                         <span class="text-danger"
-                            *ngIf="registerFormControl.confirmPassword.touched && registerFormControl.confirmPassword.errors?.passwordMismatch">
+                            *ngIf="f.confirmPassword.touched && f.confirmPassword.errors?.passwordMismatch">
                             Passwords does not match
                         </span>
                     </div>

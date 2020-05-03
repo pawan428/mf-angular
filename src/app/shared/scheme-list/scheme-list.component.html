@@ -18,7 +18,7 @@
                     <tbody>
                         <tr *ngFor="let item of holdingList">
                             <th scope="row"><img width="42" src="assets/images/avatars/{{item.imgPath}}" alt=""></th>
-                            <td>{{item.schemeName}} </td>
+                            <td><a [routerLink]="['/scheme-details', item.schemeName|urlFriendly]">{{item.schemeName}} </a></td>
                             <td>{{item.investedAmount}} </td>
                             <td>{{item.cmv}}</td>
                             <td><span>{{item.currentGain}} ({{item.wholeReturn}}%)</span></td>

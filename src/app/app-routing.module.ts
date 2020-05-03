@@ -10,6 +10,8 @@ import { SchemeListComponent } from './shared/scheme-list/scheme-list.component'
 import { CommonModule } from '@angular/common';
 import { ColorChangerDirective } from './shared/color-changer.directive';
 import { ActionButtonComponent } from './shared/action-button/action-button.component';
+import { SchemeDetailsComponent } from './pages/scheme-details/scheme-details.component';
+import { URLFriendlyPipe } from './shared/pipes/urlfriendly.pipe';
 
 
 const routes: Routes = [
@@ -27,16 +29,18 @@ const routes: Routes = [
     children: [
       { path: 'portfolio/holdings', component: HoldingsComponent }
     ]
-
   },
-
+  {
+    path: 'scheme-details/:name', component: SchemeDetailsComponent,canActivate: [AuthGuard],
+    data: { title: `Scheme-details`, description: 'details of scheme', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
+  },
   {
     path: 'home', component: PageLandingComponent,
     data: { title: 'Mutualfund', description: 'helo description for portfolio', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
 
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  // { path: '**', component: PageNotFoundComponent }
+  { path: '**',redirectTo: '/home'  }
 ];
 
 @NgModule({
@@ -47,7 +51,10 @@ const routes: Routes = [
     PortfolioDoughnutComponent,
     HoldingsComponent,
     SchemeListComponent,
-    ActionButtonComponent],
+    ActionButtonComponent,
+    SchemeDetailsComponent,
+    URLFriendlyPipe,
+  ],
   imports: [RouterModule.forRoot(routes),
     CommonModule],
   exports: [RouterModule]

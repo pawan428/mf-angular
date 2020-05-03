@@ -8,9 +8,6 @@ import { PageTitleComponent } from './layout/page-title/page-title.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { AuthGuard } from './shared/auth.guard';
-import { SchemeListComponent } from './shared/scheme-list/scheme-list.component';
-import { ColorChangerDirective } from './shared/color-changer.directive';
-import { ActionButtonComponent } from './shared/action-button/action-button.component';
 
 
 @NgModule({
@@ -20,7 +17,6 @@ import { ActionButtonComponent } from './shared/action-button/action-button.comp
     PageTitleComponent,
     FooterComponent,
     SideNavComponent,
-    
     
     
     
