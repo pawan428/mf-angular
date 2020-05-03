@@ -8,7 +8,6 @@ import { PortfolioDoughnutComponent } from './pages/portfolio-doughnut/portfolio
 import { HoldingsComponent } from './pages/holdings/holdings.component';
 import { SchemeListComponent } from './shared/scheme-list/scheme-list.component';
 import { CommonModule } from '@angular/common';
-import { ColorChangerDirective } from './shared/color-changer.directive';
 import { ActionButtonComponent } from './shared/action-button/action-button.component';
 import { SchemeDetailsComponent } from './pages/scheme-details/scheme-details.component';
 import { URLFriendlyPipe } from './shared/pipes/urlfriendly.pipe';

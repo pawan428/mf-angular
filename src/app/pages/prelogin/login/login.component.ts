@@ -10,7 +10,8 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class LoginComponent implements OnInit {
   returnUrl: string;
-  constructor(private router:Router,private route: ActivatedRoute, private authService: AuthService) {   
+  constructor(private router:Router,private route: ActivatedRoute, private authService: AuthService) { 
+    this.authService.logout();  
   }
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
