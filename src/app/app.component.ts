@@ -42,13 +42,27 @@ export class AppComponent implements OnInit, OnDestroy {
         }
         return appTitle;
       })
-    ).subscribe((ttl: string) => {
-      this.titleService.setTitle(ttl);
-      const child = this.activatedRoute.firstChild;      
-      this.page = new Page();
-      this.page.title = child.snapshot.data['title'];
-      this.page.description = child.snapshot.data['description'];
-      this.page.icon = child.snapshot.data['icon'];
+    ).subscribe((title: string) => {
+      const child = this.activatedRoute.firstChild;
+      let page = new Page();
+      page.title = child.snapshot.data['title'];
+      page.heading = child.snapshot.data['title']; //use title by default in page Heading.
+      page.description = child.snapshot.data['description'];
+
+      //check if getting blank from router then getting it from that perticluar component.
+      if (!child.snapshot.data["title"]) {
+        let storage = JSON.parse(localStorage.getItem('page'));
+        if (storage) {
+          page.title = storage["title"]
+          page.heading = storage["heading"]
+          page.description = storage["description"]
+          page.icon = storage["icon"]
+          title = page.title;
+        }
+      }
+      this.page = page;
+      this.titleService.setTitle(title);
+
     });
   }
 

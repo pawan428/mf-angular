@@ -12,10 +12,10 @@ import { ActionButtonComponent } from './shared/action-button/action-button.comp
 import { SchemeDetailsComponent } from './pages/scheme-details/scheme-details.component';
 import { URLFriendlyPipe } from './shared/pipes/urlfriendly.pipe';
 
-
+//NOTE: dont pass data if want to set it from child component elase if you passed it will show from app component setPageTitle()
 const routes: Routes = [
   {
-    path: 'auth',
+    path: 'auth',    
     loadChildren: () => import('./pages/prelogin/prelogin.module').then(m => m.PreloginModule)
   },
   {
@@ -31,11 +31,11 @@ const routes: Routes = [
   },
   {
     path: 'scheme-details/:name', component: SchemeDetailsComponent,canActivate: [AuthGuard],
-    data: { title: `Scheme Details`, description: 'Scheme Details', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
+    //data: { title: ``, description: '', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
   },
   {
     path: 'home', component: PageLandingComponent,
-    data: { title: 'Mutualfund', description: 'helo description for portfolio', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
+    data: { title: 'Bajaj Capital: Mutual Fund', description: 'helo description for portfolio', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
 
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

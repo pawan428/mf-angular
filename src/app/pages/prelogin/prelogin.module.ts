@@ -7,10 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-
-  { path: 'signup', component: SignupComponent }
+  {
+    path: '', component: LoginComponent,
+  },
+  {
+    path: 'login', component: LoginComponent,
+  },
+  {
+    path: 'signup', component: SignupComponent,
+  }
 ]
 
 @NgModule({
@@ -21,7 +26,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers:[UsernameValidator]
+  providers: [UsernameValidator]
 
 })
 export class PreloginModule { }
