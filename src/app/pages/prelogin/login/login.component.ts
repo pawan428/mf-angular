@@ -14,8 +14,6 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   constructor(private router: Router, private route: ActivatedRoute,
     private authService: AuthService, private titleService: Title) {
-    this.authService.logout();
-
   }
   ngOnInit() {
     this.titleService.setTitle('Login');

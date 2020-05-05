@@ -8,6 +8,7 @@ import { PageTitleComponent } from './layout/page-title/page-title.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { AuthGuard } from './shared/auth.guard';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -17,8 +18,7 @@ import { AuthGuard } from './shared/auth.guard';
     PageTitleComponent,
     FooterComponent,
     SideNavComponent,
-    
-    
+ 
     
     
   ],

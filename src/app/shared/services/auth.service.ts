@@ -25,11 +25,11 @@ export class AuthService {
     user.id = 1;
     localStorage.setItem('user', JSON.stringify(user));
   }
-  logout() {
+  logout() {    
+    this.router.navigate(['/auth/login']);
     localStorage.removeItem('user');
     localStorage.removeItem('page');
     this.getLoggedInfo.emit(null);
-    this.router.navigate(['/auth/login']);
   }
   getCurrentUser() {
     let user: User;

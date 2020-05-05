@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 import { ActionButtonComponent } from './shared/action-button/action-button.component';
 import { SchemeDetailsComponent } from './pages/scheme-details/scheme-details.component';
 import { URLFriendlyPipe } from './shared/pipes/urlfriendly.pipe';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { SharedModule } from './shared/shared.module';
 
 //NOTE: dont pass data if want to set it from child component elase if you passed it will show from app component setPageTitle()
 const routes: Routes = [
@@ -39,11 +41,11 @@ const routes: Routes = [
 
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**',redirectTo: '/home'  }
+  { path: '**',component: PageNotFoundComponent }
 ];
 
 @NgModule({
-  declarations: [    
+  declarations: [   
     PageLandingComponent,
     DashboardComponent,
     PortfolioComponent,
@@ -52,10 +54,13 @@ const routes: Routes = [
     SchemeListComponent,
     ActionButtonComponent,
     SchemeDetailsComponent,
+    
     URLFriendlyPipe,
   ],
   imports: [RouterModule.forRoot(routes),
-    CommonModule],
+    CommonModule,
+    SharedModule
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

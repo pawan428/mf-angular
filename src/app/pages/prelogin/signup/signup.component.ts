@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidatorService } from 'src/app/shared/validators/custom-validator.service';
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-signup',
@@ -17,9 +18,12 @@ export class SignupComponent {
     private fb: FormBuilder,
     private customValidator: CustomValidatorService,
     public usernameValidator: UsernameValidator,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Signup');
+
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email], this.usernameValidator.checkUsername.bind(this.usernameValidator)],

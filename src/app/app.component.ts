@@ -17,17 +17,17 @@ export class AppComponent implements OnInit, OnDestroy {
   // icon;
   page: Page; // for title, desciption, etc.
   // used as inputs
-  hasLoggedIn: boolean;
+  hasLoggedIn: boolean = false;
   currentUser: User;
   constructor(private router: Router, private authService: AuthService,
     private titleService: Title, private activatedRoute: ActivatedRoute) {
+
   }
   ngOnInit() {
     this.authService.getLoggedInfo.subscribe(user => {
       this.currentUser = user;
       this.hasLoggedIn = user ? true : false;
     })
-
     this.setPageTitle();
   }
 
@@ -42,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }
         return appTitle;
       })
+
     ).subscribe((title: string) => {
       const child = this.activatedRoute.firstChild;
       let page = new Page();
