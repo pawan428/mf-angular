@@ -1,34 +1,50 @@
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { LoaderService } from '../services/loader.service';
+import { TestBed } from '@angular/core/testing';
 
 @Injectable()
 export class UsernameValidator {
 
     debouncer: any;
 
-    constructor() {
+    constructor(private loaderService: LoaderService) {
 
     }
 
-    checkUsername(control: FormControl): any {
+    checkAvailability(control: FormControl): any {
 
         clearTimeout(this.debouncer);
-
+        let ref = this;
         return new Promise(resolve => {
-
             this.debouncer = setTimeout(() => {
-
-                //this.authProvider.validateUsername(control.value).subscribe((res) => {
-                    console.log(control.value);
-                if (control.value === "test@test.com") { //call here api to check value from database.
-                    resolve({ 'usernameInUse': true });
-                }
-                else {
-                    resolve(null);
-                }
+                this.loaderService.show('Checking Availability');
+                let avlPromise = this.isAvailable(control.value);
+                avlPromise.then(function (avl) {
+                    if (avl) {
+                        resolve(null);
+                    }
+                    else {
+                        resolve({ 'usernameInUse': true });
+                    }
+                    ref.loaderService.hide();
+                })
             }, 1000);
-
-        });
+        })
     }
 
+    isAvailable(val) {
+        //call here api to check value from database.
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                let bool;
+                if (val !== "test@test.com")
+                    bool = true;
+                else
+                    bool = false;
+
+                resolve(bool);
+            }, 2000);
+        })
+    }
 }

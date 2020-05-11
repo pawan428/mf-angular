@@ -49,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
       page.title = child.snapshot.data['title'];
       page.heading = child.snapshot.data['title']; //use title by default in page Heading.
       page.description = child.snapshot.data['description'];
-
+      page.icon = child.snapshot.data['icon'];
       //check if getting blank from router then getting it from that perticluar component.
       if (!child.snapshot.data["title"]) {
         let storage = JSON.parse(localStorage.getItem('page'));

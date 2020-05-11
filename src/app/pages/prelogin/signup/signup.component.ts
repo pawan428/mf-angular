@@ -13,7 +13,6 @@ export class SignupComponent {
 
   registerForm: FormGroup;
   submitted = false;
-
   constructor(
     private fb: FormBuilder,
     private customValidator: CustomValidatorService,
@@ -26,7 +25,8 @@ export class SignupComponent {
 
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email], this.usernameValidator.checkUsername.bind(this.usernameValidator)],
+      email: ['', [Validators.required, Validators.email], 
+      this.usernameValidator.checkAvailability.bind(this.usernameValidator)],
       password: ['', Validators.compose([Validators.required, this.customValidator.patternValidator()])],
       confirmPassword: ['', [Validators.required]],
     },
@@ -35,7 +35,6 @@ export class SignupComponent {
       }
     );
   }
-
   get f() {
     return this.registerForm.controls;
   }
