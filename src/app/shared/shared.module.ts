@@ -6,7 +6,9 @@ import { LoaderComponent } from '../pages/loader/loader.component';
 
 
 @NgModule({
-  declarations: [PageNotFoundComponent],
+  declarations: [PageNotFoundComponent,LoaderComponent],
+  exports: [PageNotFoundComponent,LoaderComponent],
+
   imports: [
     CommonModule
   ]
