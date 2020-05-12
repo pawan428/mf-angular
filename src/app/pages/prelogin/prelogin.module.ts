@@ -6,7 +6,7 @@ import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from 'src/app/modules/shared.module';
 
 const routes: Routes = [
   {

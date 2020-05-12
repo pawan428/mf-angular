@@ -10,17 +10,16 @@ import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { Routes, RouterModule } from '@angular/router';
 import { PageLandingComponent } from './pages/page-landing/page-landing.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AuthGuard } from './shared/auth.guard';
+import { AuthGuard } from './shared/services/auth.guard';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
-import { PortfolioDoughnutComponent } from './pages/portfolio-doughnut/portfolio-doughnut.component';
 import { HoldingsComponent } from './pages/holdings/holdings.component';
-import { SchemeListComponent } from './shared/scheme-list/scheme-list.component';
+import { SchemeListComponent } from './components/scheme-list/scheme-list.component';
 import { CommonModule } from '@angular/common';
-import { ActionButtonComponent } from './shared/action-button/action-button.component';
+import { ActionButtonComponent } from './components/action-button/action-button.component';
 import { SchemeDetailsComponent } from './pages/scheme-details/scheme-details.component';
 import { URLFriendlyPipe } from './shared/pipes/urlfriendly.pipe';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './modules/shared.module';
 
 //NOTE: dont pass data if want to set it from child component elase if you passed it will show from app component setPageTitle()
 const routes: Routes = [
@@ -62,7 +61,6 @@ const routes: Routes = [
     PageLandingComponent,
     DashboardComponent,
     PortfolioComponent,
-    PortfolioDoughnutComponent,
     HoldingsComponent,
     SchemeListComponent,
     ActionButtonComponent,
