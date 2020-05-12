@@ -2,10 +2,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './layout/header/header.component';
-import { PageTitleComponent } from './layout/page-title/page-title.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { SideNavComponent } from './layout/side-nav/side-nav.component';
 
 import { Routes, RouterModule } from '@angular/router';
 import { PageLandingComponent } from './pages/page-landing/page-landing.component';
@@ -15,11 +11,11 @@ import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { HoldingsComponent } from './pages/holdings/holdings.component';
 import { SchemeListComponent } from './components/scheme-list/scheme-list.component';
 import { CommonModule } from '@angular/common';
-import { ActionButtonComponent } from './components/action-button/action-button.component';
 import { SchemeDetailsComponent } from './pages/scheme-details/scheme-details.component';
 import { URLFriendlyPipe } from './shared/pipes/urlfriendly.pipe';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { SharedModule } from './modules/shared.module';
+import { LayoutModule } from './modules/layout.module';
 
 //NOTE: dont pass data if want to set it from child component elase if you passed it will show from app component setPageTitle()
 const routes: Routes = [
@@ -54,25 +50,21 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    PageTitleComponent,
-    FooterComponent,
-    SideNavComponent,
+   
     PageLandingComponent,
     DashboardComponent,
     PortfolioComponent,
     HoldingsComponent,
     SchemeListComponent,
-    ActionButtonComponent,
     SchemeDetailsComponent,
     URLFriendlyPipe,
   ],
   imports: [
     RouterModule.forRoot(routes),
     CommonModule,
-    SharedModule,
     BrowserModule,
-    
+    LayoutModule,
+    SharedModule    
   ],
   providers: [AuthGuard, Title],
   bootstrap: [AppComponent]
