@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from '../pages/prelogin/login/login.component';
+import { SignupComponent } from '../pages/prelogin/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
-import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from '../pages/page-not-found/page-not-found.component';
 import { SharedModule } from 'src/app/modules/shared.module';
 
 const routes: Routes = [

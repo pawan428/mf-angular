@@ -1,19 +1,13 @@
-import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-
-import { Routes, RouterModule } from '@angular/router';
-import { PageLandingComponent } from './pages/page-landing/page-landing.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AuthGuard } from './shared/services/auth.guard';
-import { PortfolioComponent } from './pages/portfolio/portfolio.component';
-import { HoldingsComponent } from './pages/holdings/holdings.component';
-import { SchemeListComponent } from './components/scheme-list/scheme-list.component';
-import { CommonModule } from '@angular/common';
-import { SchemeDetailsComponent } from './pages/scheme-details/scheme-details.component';
-import { URLFriendlyPipe } from './shared/pipes/urlfriendly.pipe';
+import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+
+import { AuthGuard } from './shared/services/auth.guard';
+import { CommonModule } from '@angular/common';
 import { SharedModule } from './modules/shared.module';
 import { LayoutModule } from './modules/layout.module';
 
@@ -21,28 +15,29 @@ import { LayoutModule } from './modules/layout.module';
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import('./pages/prelogin/prelogin.module').then(m => m.PreloginModule)
+    loadChildren: () => import('./modules/prelogin.module').then(m => m.PreloginModule)
   },
   {
-    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
-    data: { title: 'Dashboard', description: 'Highly configurable boxes best used for showing numbers in an user friendly way.', icon: 'pe-7s-monitor' }
-  },
-  {
-    path: 'portfolio', component: PortfolioComponent, canActivate: [AuthGuard],
-    data: { title: 'Portfolio', description: 'helo description for portfolio', icon: 'pe-7s-portfolio' },
-    children: [
-      { path: 'portfolio/holdings', component: HoldingsComponent }
-    ]
-  },
-  {
-    path: 'scheme-details/:name', component: SchemeDetailsComponent, canActivate: [AuthGuard],
-    //data: { title: ``, description: '', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
-  },
-  {
-    path: 'home', component: PageLandingComponent,
+    path: 'home', component: HomeComponent,
     data: { title: 'Bajaj Capital: Mutual Fund', description: 'helo description for portfolio', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
 
   },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./modules/dashboard.module').then(m => m.DashboardModule),
+    data: { title: 'Dashboard', description: 'Highly configurable boxes best used for showing numbers in an user friendly way.', icon: 'pe-7s-monitor' }
+  },
+  {
+    path: 'my-holdings',
+    loadChildren: () => import('./modules/holdings.module').then(m => m.HoldingsModule),
+    data: { title: 'My Holdings', description: 'My Holdings showing numbers in an user friendly way.', icon: 'pe-7s-monitor' }
+
+  },
+  {
+    path: 'scheme-details',
+    loadChildren: () => import('./modules/scheme-details.module').then(m => m.SchemeDetailsModule)
+  },
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -50,21 +45,15 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-   
-    PageLandingComponent,
-    DashboardComponent,
-    PortfolioComponent,
-    HoldingsComponent,
-    SchemeListComponent,
-    SchemeDetailsComponent,
-    URLFriendlyPipe,
+    HomeComponent,
+
   ],
   imports: [
     RouterModule.forRoot(routes),
     CommonModule,
     BrowserModule,
     LayoutModule,
-    SharedModule    
+    SharedModule
   ],
   providers: [AuthGuard, Title],
   bootstrap: [AppComponent]
