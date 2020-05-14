@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from '../pages/prelogin/login/login.component';
-import { SignupComponent } from '../pages/prelogin/signup/signup.component';
+import { LoginComponent } from '../pages/login/login.component';
+import { SignupComponent } from '../pages/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
 import { PageNotFoundComponent } from '../pages/page-not-found/page-not-found.component';

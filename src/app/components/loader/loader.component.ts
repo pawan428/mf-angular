@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 
 @Component({
@@ -9,12 +9,14 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
 export class LoaderComponent implements OnInit, OnDestroy {
   text: string;
   visible: boolean;
+  fullpage: boolean;
   constructor(private loaderService: LoaderService) { }
   ngOnInit() {
     this.loaderService.loaderSubject.subscribe(l => {
       if (l) {
         this.text = l.text;
         this.visible = l.visible;
+        this.fullpage = l.fullpage;
       }
     });
   }

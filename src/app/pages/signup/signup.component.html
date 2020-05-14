@@ -28,8 +28,8 @@
                             Enter a valid email address
                         </span>
                         <span class="text-danger"
-                            *ngIf="f.email.touched && f.email.errors?.usernameInUse">
-                            email address not available
+                            *ngIf="f.email.errors?.usernameInUse">
+                            Email address already registered
                         </span>
                     </div>
                     

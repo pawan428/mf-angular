@@ -18,7 +18,7 @@ export class UsernameValidator {
         let ref = this;
         return new Promise(resolve => {
             this.debouncer = setTimeout(() => {
-                this.loaderService.show('Checking Availability');
+                this.loaderService.show('Checking Availability',false);
                 let avlPromise = this.isAvailable(control.value);
                 avlPromise.then(function (avl) {
                     if (avl) {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Loader } from 'src/app/data/loader';
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class LoaderService {
     loader.text = this.defaultText;
     this.loaderSubject.next(loader);
   }
-  show(text: string) {
+  show(text: string,fullpage) {
     let loader= new Loader();
     loader.visible = true;
     if (text)
@@ -26,11 +27,12 @@ export class LoaderService {
     else
       loader.text = this.defaultText;
   
+      if(fullpage)
+      loader.fullpage=fullpage;
+      else
+      loader.fullpage=false;
+
       this.loaderSubject.next(loader);
     }
 }
-class Loader {
-  visible: boolean
-  text: string
 
-}
