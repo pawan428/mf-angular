@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Loader } from 'src/app/data/loader';
+import { Loader } from 'src/app/models/loader';
 
 
 @Injectable({

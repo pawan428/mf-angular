@@ -1,6 +1,6 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/data/user';
+import { User } from 'src/app/models/user';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -25,11 +25,17 @@ export class AuthService {
     user.id = 1;
     localStorage.setItem('user', JSON.stringify(user));
   }
-  logout() {    
-    this.router.navigate(['/auth/login']);
-    localStorage.removeItem('user');
-    localStorage.removeItem('page');
-    this.getLoggedInfo.emit(null);
+  logout() {
+    let promise = new Promise((resolve, reject) => {
+      //setTimeout(() => { //just for rnd, remove this later
+        localStorage.removeItem('user');
+        localStorage.removeItem('page');
+        this.getLoggedInfo.emit(null);
+        resolve();
+      //}, 2000);
+    })
+    return promise;
+
   }
   getCurrentUser() {
     let user: User;
@@ -38,7 +44,7 @@ export class AuthService {
       if (jsonstring)
         user = JSON.parse(jsonstring);
       observer.next(user)
-      observer.complete()          
+      observer.complete()
     })
     return simpleObservable;
   }

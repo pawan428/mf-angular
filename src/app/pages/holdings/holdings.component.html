@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
-        <div class="main-card mb-3 card">
-            <div class="card-body">
+        <div class="main-card mb-3 card">            
+            <div class="card-body" *ngIf="schemeList">
                 <app-scheme-list [schemeList]="schemeList"></app-scheme-list>
             </div>
         </div>

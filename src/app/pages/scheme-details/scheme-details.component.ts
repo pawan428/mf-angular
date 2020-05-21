@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Page } from 'src/app/data/page';
+import { Page } from 'src/app/models/page';
 
 @Component({
   selector: 'app-scheme-details',

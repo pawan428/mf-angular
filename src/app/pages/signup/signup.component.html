@@ -18,7 +18,6 @@
                     <div class="form-group">
                         <label>Email </label>                        
                         <input type="text" class="form-control" formControlName="email">
-                        <app-loader></app-loader>
                         <span class="text-danger"
                             *ngIf="(f.email.touched || submitted) && f.email.errors?.required">
                             Email is required
@@ -59,7 +58,7 @@
                         </span>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="mt-2 mb-2 btn btn-danger w-full btn-lg">Register</button>
+                        <button type="submit" class="mb-2 mr-2 btn btn-danger btn-lg btn-block">Register</button>
                     </div>
                 </form>
             </div>

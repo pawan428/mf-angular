@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,13 +9,13 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class HeaderComponent implements OnInit {
   @Input() currentUser;
   @Input() hasLoggedIn;
-  constructor(private authService: AuthService) {   
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
   }
-  logout() {
-    this.authService.logout();
+  async logout() {
+    await this.authService.logout(); 
+    this.router.navigate(['/auth/login']);
   }
-  
 }

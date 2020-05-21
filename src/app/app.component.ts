@@ -3,8 +3,8 @@ import { AuthService } from './shared/services/auth.service';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { filter, map } from 'rxjs/operators';
-import { User } from './data/user';
-import { Page } from './data/page';
+import { User } from './models/user';
+import { Page } from './models/page';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

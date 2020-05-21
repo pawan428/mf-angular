@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Page } from 'src/app/data/page';
+import { Page } from 'src/app/models/page';
 
 @Component({
   selector: 'app-page-title',

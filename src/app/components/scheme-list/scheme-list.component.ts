@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Holding } from 'src/app/data/holding';
+import { Holding } from 'src/app/models/holding';
 
 @Component({
   selector: 'app-scheme-list',
