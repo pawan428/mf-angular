@@ -1,0 +1,42 @@
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#investModal">
+        Launch demo modal
+      </button>   -->
+<!-- Modal -->
+<div class="modal fade" id="investModal" tabindex="-1" role="dialog" aria-labelledby="investModalLabel"
+  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form class="form" [formGroup]="purchaseForm" (ngSubmit)="onSubmit()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="investModalLabel">Buy more in</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h6>{{selectedScheme?.schemeName}}</h6>
+          <hr>
+          <div class="form-group">
+            <label>Enter amount to invest</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">₹</span>
+              </div>
+              <input type="text" numOnly="true" class="form-control" formControlName="amount" placeholder="amount">
+            </div>
+            <span class="text-danger" *ngIf="(f.amount.touched || submitted) && f.amount.errors?.required">
+              Amount is required.
+            </span>
+            <span class="text-danger" *ngIf="(f.amount.touched || submitted) && f.amount.errors?.invalidAmount">
+              Amount is not valid. Do not start with zero or do not enter decimal value.
+            </span>
+            
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Invest</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

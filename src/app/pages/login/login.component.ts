@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.login();
       this.router.navigateByUrl(this.returnUrl);
       this.loaderService.hide();
-    }, 2000);
+    }, 500);
 
   }
   ngOnDestroy() {

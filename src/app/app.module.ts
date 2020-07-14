@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from './modules/shared.module';
 import { LayoutModule } from './modules/layout.module';
 
+
 //NOTE: dont pass data if want to set it from child component elase if you passed it will show from app component setPageTitle()
 const routes: Routes = [
   {
@@ -45,8 +46,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    
+    HomeComponent,   
   ],
   imports: [
     RouterModule.forRoot(routes),

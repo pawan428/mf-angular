@@ -10,10 +10,10 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
 })
 export class HoldingsComponent implements OnInit {
   schemeList: Holding[];
-  constructor(private loaderService:LoaderService) { }
+  constructor(private loaderService: LoaderService) { }
 
   ngOnInit() {
-    this.loaderService.show('Loading your Holdings, Please Wait...',true);
+    this.loaderService.show('Loading your Holdings, Please Wait...', true);
     setTimeout(() => {
       this.schemeList = [
         { id: 1, schemeName: "HDFC top 100 Equity Fund", cmv: 60000, imgPath: "1.jpg", investedAmount: 50000 },
@@ -27,9 +27,10 @@ export class HoldingsComponent implements OnInit {
         { id: 4, schemeName: "Franklin Tempelton Blue Chip fund Direct Growth", cmv: 23.34, imgPath: "4.jpg", investedAmount: 1000 },
         { id: 5, schemeName: "Mirae Asset Mid Cap Fund Dividened Payout", cmv: 23.34, imgPath: "5.jpg", investedAmount: 4000 },
       ]
-    this.loaderService.hide();
+      this.loaderService.hide();
 
-    }, 2000);
+    }, 500);
   }
+
 
 }

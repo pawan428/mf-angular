@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
 import { PageNotFoundComponent } from '../pages/page-not-found/page-not-found.component';
 import { SharedModule } from 'src/app/modules/shared.module';
+import { NumOnlyDirective } from '../shared/directives/num-only.directive';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
+    
   declarations: [LoginComponent, SignupComponent],
   imports: [
     RouterModule.forChild(routes),

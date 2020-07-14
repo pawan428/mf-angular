@@ -6,9 +6,10 @@
     <div class="app-main__outer" [ngClass]="{'side-nav-active': hasLoggedIn===false}">
       <div class="app-main__inner">
         <app-page-title [page]="page" *ngIf="hasLoggedIn"></app-page-title>
-        <router-outlet></router-outlet>
+        <router-outlet></router-outlet>        
       </div>
     </div>
   </div>
   <app-footer></app-footer>
 </div>
+

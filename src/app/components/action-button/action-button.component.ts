@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Scheme } from 'src/app/models/scheme';
 
 @Component({
   selector: 'app-action-button',
@@ -6,13 +7,16 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./action-button.component.css']
 })
 export class ActionButtonComponent implements OnInit {
-@Input() scheme;
+  @Input() scheme;
+  @Output() loadScheme = new EventEmitter();
   constructor() { }
 
   ngOnInit() {
   }
-  invest(action)
+
+  selectScheme(val)
   {
-    console.log(this.scheme,action);
+    //this.loadScheme=val;
+    this.loadScheme.emit(val);
   }
 }

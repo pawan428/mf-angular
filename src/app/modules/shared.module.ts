@@ -6,30 +6,42 @@ import { ActionButtonComponent } from '../components/action-button/action-button
 import { SchemeListComponent } from '../components/scheme-list/scheme-list.component';
 import { URLFriendlyPipe } from '../shared/pipes/urlfriendly.pipe';
 import { RouterModule } from '@angular/router';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NumOnlyDirective } from '../shared/directives/num-only.directive';
+import { PurchaseModalComponent } from '../components/purchase-modal/purchase-modal.component';
+import { RedeemModalComponent } from '../components/redeem-modal/redeem-modal.component';
 
 
 @NgModule({
   declarations: [
+    //components
     PageNotFoundComponent,
     LoaderComponent,
     ActionButtonComponent,
     SchemeListComponent,
+    PurchaseModalComponent,
+    RedeemModalComponent,
 
     //pipes
-    URLFriendlyPipe
+    URLFriendlyPipe,
+    //directives
+    NumOnlyDirective
   ],
   
   exports: [
     PageNotFoundComponent,
     LoaderComponent,
     ActionButtonComponent,
-    SchemeListComponent
+    SchemeListComponent,
+    PurchaseModalComponent,
+    RedeemModalComponent,    
   ],
 
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

@@ -8,6 +8,7 @@ import { Holding } from 'src/app/models/holding';
 })
 export class SchemeListComponent implements OnInit {
   @Input() schemeList;
+  selectedScheme;
   holdingList: Holding;
   constructor() { }
 
@@ -22,5 +23,8 @@ export class SchemeListComponent implements OnInit {
         currentGain: (a.cmv - a.investedAmount),
         wholeReturn: ((a.cmv - a.investedAmount) * 100 / a.investedAmount).toFixed(1)
       }));
+  }
+  initScheme(val) {
+    this.selectedScheme = val;
   }
 }

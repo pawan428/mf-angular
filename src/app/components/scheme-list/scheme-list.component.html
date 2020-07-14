@@ -7,7 +7,6 @@
             <th>Current Value</th>
             <th>Current Gain</th>
             <th>Action</th>
-
         </tr>
     </thead>
     <tbody>
@@ -18,11 +17,13 @@
             <td>{{item.cmv}}</td>
             <td><span>{{item.currentGain}} ({{item.wholeReturn}}%)</span></td>
             <td>
-                <app-action-button [scheme]="item"></app-action-button>
+                <app-action-button (loadScheme)="initScheme($event)" [scheme]="item"></app-action-button>
             </td>
-
-
         </tr>
-
     </tbody>
 </table>
+<app-purchase-modal [selectedScheme]="selectedScheme" ></app-purchase-modal>
+<app-redeem-modal [selectedScheme]="selectedScheme" ></app-redeem-modal>
+
+
+    
