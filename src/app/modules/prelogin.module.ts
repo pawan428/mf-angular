@@ -8,6 +8,8 @@ import { UsernameValidator } from 'src/app/shared/validators/username-validators
 import { PageNotFoundComponent } from '../pages/page-not-found/page-not-found.component';
 import { SharedModule } from 'src/app/modules/shared.module';
 import { NumOnlyDirective } from '../shared/directives/num-only.directive';
+import { UserService } from '../shared/services/user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -30,9 +32,10 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [UsernameValidator]
+  providers: [UsernameValidator, UserService]
 
 })
 export class PreloginModule { }

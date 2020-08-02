@@ -8,49 +8,52 @@
                 <p>Already have an account with us? <a routerLink="/auth/login">Click here</a></p>
                 <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" formControlName="name">
-                        <span class="text-danger"
-                            *ngIf="(f.name.touched || submitted) && f.name.errors?.required">
-                            Name is required
+                        <label>First Name</label>
+                        <input type="text" class="form-control" formControlName="firstName">
+                        <span class="text-danger" *ngIf="submitted && f.firstName.errors?.required">
+                            First name is required
                         </span>
                     </div>
                     <div class="form-group">
-                        <label>Email </label>                        
-                        <input type="text" class="form-control" formControlName="email">
-                        <span class="text-danger"
-                            *ngIf="(f.email.touched || submitted) && f.email.errors?.required">
-                            Email is required
-                        </span>
-                        <span class="text-danger"
-                            *ngIf="f.email.touched && f.email.errors?.email">
-                            Enter a valid email address
-                        </span>
-                        <span class="text-danger"
-                            *ngIf="f.email.errors?.usernameInUse">
-                            Email address already registered
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" formControlName="lastName">
+                        <span class="text-danger" *ngIf="submitted && f.lastName.errors?.required">
+                            Last name is required
                         </span>
                     </div>
-                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" formControlName="email">                            
+                        </div>
+                        <span class="text-danger" *ngIf="submitted && f.email.errors?.required">
+                            Email is required
+                        </span>
+                        <span class="text-danger" *ngIf="f.email.touched && f.email.errors?.email">
+                            Email is not valid
+                        </span>
+                        <span class="text-danger" *ngIf="f.email.errors?.usernameUsed===true">
+                            Email already registered. Please try with another email.
+                        </span>                       
+                    </div>
+
                     <div class="form-group">
                         <label>Password</label>
                         <input type="password" class="form-control" formControlName="password">
-                        <span class="text-danger"
-                            *ngIf="(f.password.touched || submitted) && f.password.errors?.required">
+                        <span class="text-danger" *ngIf="submitted && f.password.errors?.required">
                             Password is required
                         </span>
-                        <span class="text-danger"
-                            *ngIf="f.password.touched && f.password.errors?.invalidPassword">
+                        <span class="text-danger" *ngIf="f.password.touched && f.password.errors?.invalidPassword">
                             Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase
-                            letter and 1 number
+                            letter and 1 number.
                         </span>
                     </div>
                     <div class="form-group">
-                        <label>Confirm Password</label>
+                        <label>Password again</label>
                         <input type="password" class="form-control" formControlName="confirmPassword">
                         <span class="text-danger"
                             *ngIf="(f.confirmPassword.touched || submitted)&& f.confirmPassword.errors?.required">
-                            Confirm Password is required
+                            Enter your password again
                         </span>
                         <span class="text-danger"
                             *ngIf="f.confirmPassword.touched && f.confirmPassword.errors?.passwordMismatch">
@@ -60,6 +63,7 @@
                     <div class="form-group">
                         <button type="submit" class="mb-2 mr-2 btn btn-danger btn-lg btn-block">Register</button>
                     </div>
+                    <div class="alert" *ngIf="error" [ngClass]="{'alert-success': error?.ErrorCode==0, 'alert-danger': error?.ErrorCode!=0}">{{error?.ErrorMessage}}</div>
                 </form>
             </div>
         </div>

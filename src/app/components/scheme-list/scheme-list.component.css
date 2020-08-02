@@ -1,1 +1,18 @@
 table th{border-top:none;}
+.risk
+{   
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #c1c1c1;    
+}
+.star {
+    font-size: 8px;
+    margin-left: 2px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+.big
+{
+    font-size:15px;
+}

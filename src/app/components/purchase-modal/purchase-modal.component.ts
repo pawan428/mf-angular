@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AmountValidatorService } from 'src/app/shared/validators/amount-validators.service';
 
-
 @Component({
   selector: 'app-purchase-modal',
   templateUrl: './purchase-modal.component.html',
@@ -22,13 +21,14 @@ export class PurchaseModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.purchaseForm = this.fb.group({
-      amount: ['', Validators.compose([Validators.required, this.amountValidator.validate()])],
-    });
+    this.initForm();
   }
 
-  getScheme(val) {
-    console.log('get', val);
+  initForm() {
+    this.purchaseForm = this.fb.group({
+      amount: ['5000', Validators.compose([Validators.required, this.amountValidator.validate()])],
+      orderType: ['l', Validators.required]
+    });
   }
   onSubmit() {
     this.submitted = true;
@@ -38,6 +38,7 @@ export class PurchaseModalComponent implements OnInit {
   }
   closeModal() {
     this.submitted = false;
-    this.purchaseForm.reset();
+    this.purchaseForm.clearValidators();
+    this.initForm();
   }
 }

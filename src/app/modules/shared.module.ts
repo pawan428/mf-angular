@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NumOnlyDirective } from '../shared/directives/num-only.directive';
 import { PurchaseModalComponent } from '../components/purchase-modal/purchase-modal.component';
 import { RedeemModalComponent } from '../components/redeem-modal/redeem-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { RedeemModalComponent } from '../components/redeem-modal/redeem-modal.co
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class SharedModule { }

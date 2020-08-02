@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidatorService } from 'src/app/shared/validators/custom-validator.service';
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
 import { Title } from '@angular/platform-browser';
+import { UserService } from 'src/app/shared/services/user.service';
+import { Error } from '../../models/error';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-signup',
@@ -10,23 +13,25 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-
+  error: Error;
   registerForm: FormGroup;
   submitted = false;
   constructor(
     private fb: FormBuilder,
     private customValidator: CustomValidatorService,
     public usernameValidator: UsernameValidator,
-    private titleService: Title
+    private titleService: Title,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     this.titleService.setTitle('Signup');
 
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email], 
-      this.usernameValidator.checkAvailability.bind(this.usernameValidator)],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email],
+        this.usernameValidator.checkAvailability.bind(this.usernameValidator)],
       password: ['', Validators.compose([Validators.required, this.customValidator.patternValidator()])],
       confirmPassword: ['', [Validators.required]],
     },
@@ -42,8 +47,15 @@ export class SignupComponent {
   onSubmit() {
     this.submitted = true;
     if (this.registerForm.valid) {
-      ///alert('Form Submitted succesfully!!!\n Check the values in browser console.');
-      console.log(this.registerForm.value);
+      let user:User=this.registerForm.value;
+      user.role="user";
+      
+      this.userService.postUser(this.registerForm.value).subscribe(res => {
+        this.error = res[0];
+        if (this.error.errorCode == 0) {
+          this.registerForm.reset();
+        }
+      });
     }
   }
 }

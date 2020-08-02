@@ -2,13 +2,16 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { Observable } from 'rxjs/internal/Observable';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+const uri = environment.uri;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   @Output() getLoggedInfo: EventEmitter<any> = new EventEmitter();
-  constructor(private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   isLoggedIn(): boolean {
     let bool = false;
@@ -18,20 +21,22 @@ export class AuthService {
     });
     return bool;
   }
-  login() {
-    let user = new User();
-    user.name = "Pawan Sharma";
-    user.role = "Administrator";
-    user.id = 1;
-    localStorage.setItem('user', JSON.stringify(user));
+  login(username: string, password: string) {
+    let credential = { username, password };
+    console.log(credential);
+    this.http.post(`${uri}/auth/login`, credential).subscribe(r=>{
+      console.log(r);
+     // localStorage.setItem('user', JSON.stringify(user));
+
+    });
   }
   logout() {
     let promise = new Promise((resolve, reject) => {
       //setTimeout(() => { //just for rnd, remove this later
-        localStorage.removeItem('user');
-        localStorage.removeItem('page');
-        this.getLoggedInfo.emit(null);
-        resolve();
+      localStorage.removeItem('user');
+      localStorage.removeItem('page');
+      this.getLoggedInfo.emit(null);
+      resolve();
       //}, 2000);
     })
     return promise;

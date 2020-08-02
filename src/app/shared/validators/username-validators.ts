@@ -25,7 +25,7 @@ export class UsernameValidator {
                         resolve(null);
                     }
                     else {
-                        resolve({ 'usernameInUse': true });
+                        resolve({ 'usernameUsed': true });
                     }
                     ref.loaderService.hide();
                 })

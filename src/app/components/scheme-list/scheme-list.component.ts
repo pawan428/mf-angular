@@ -9,21 +9,11 @@ import { Holding } from 'src/app/models/holding';
 export class SchemeListComponent implements OnInit {
   @Input() schemeList;
   selectedScheme;
-  holdingList: Holding;
   constructor() { }
 
   ngOnInit() {
-
-    this.holdingList = this.schemeList.map(a => Object.assign(
-      {
-        id: a.id,
-        schemeName: a.schemeName,
-        investedAmount: a.investedAmount,
-        cmv: a.cmv,
-        currentGain: (a.cmv - a.investedAmount),
-        wholeReturn: ((a.cmv - a.investedAmount) * 100 / a.investedAmount).toFixed(1)
-      }));
   }
+  
   initScheme(val) {
     this.selectedScheme = val;
   }
