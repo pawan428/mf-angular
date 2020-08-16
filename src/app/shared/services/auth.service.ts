@@ -26,6 +26,10 @@ export class AuthService {
     return promise;
 
   }
+  getAccessToken()
+  {
+    return "pawaana";//localStorage.getItem('token');
+  }
   getCurrentUser() {
     // let token = localStorage.getItem('token');
     // let headers = new HttpHeaders();

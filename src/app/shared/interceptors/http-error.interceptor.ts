@@ -17,6 +17,8 @@ import {
 import { Observable, throwError } from 'rxjs';
 
 import { retry, catchError } from 'rxjs/operators';
+import { ErrorService } from '../services/error.service';
+import { Injector } from '@angular/core';
 
 
 
@@ -33,4 +35,5 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         })
       )
   }
+
 }

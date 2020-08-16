@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     try {
-     // JSON.parse('sa');
+      // JSON.parse('sa');
       this.submitted = true;
       if (this.loginForm.valid) {
         this.loaderService.show('Logging in, please wait!', true);
@@ -58,15 +58,16 @@ export class LoginComponent implements OnInit, OnDestroy {
             localStorage.removeItem("token");
           }
           this.loaderService.hide();
-        },
-          (err) => {
-            this.errorService.catchError(err);
-            this.loaderService.hide();
-          });
+        }
+          ,
+            (err) => {
+              this.errorService.catchError(err);
+              this.loaderService.hide();
+            
+            });
       }
     } catch (error) {
       this.errorService.catchError(error);
-
     }
   }
 
