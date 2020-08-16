@@ -13,7 +13,6 @@ export class HttpHeaderInterceptor implements HttpInterceptor {
     headerSettings['Content-Type'] = 'application/json';
     headerSettings['x-access-token'] = token || "";
 
-
     const newHeader = new HttpHeaders(headerSettings);
     return next.handle(httpRequest.clone({ headers: newHeader }));
   }

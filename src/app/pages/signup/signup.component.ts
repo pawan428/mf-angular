@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidatorService } from 'src/app/shared/validators/custom-validator.service';
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
 import { Title } from '@angular/platform-browser';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { LoaderService } from 'src/app/shared/services/loader.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class SignupComponent {
     public usernameValidator: UsernameValidator,
     private titleService: Title,
     private userService: UserService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private loader: LoaderService
 
   ) { }
 
@@ -50,12 +52,17 @@ export class SignupComponent {
 
   onSubmit() {
     this.submitted = true;
-    //if (this.registerForm.valid) {
-    this.userService.postUser(this.registerForm.value).subscribe(res => {
-      console.log(res);
-    }, err => {
-      this.errorService.catchError(err);
-    });
-    // }
-  }
+    if (this.registerForm.valid) {
+      this.loader.show('Submitting, Please wait', true);
+      this.userService.postUser(this.registerForm.value).subscribe(res => {
+        console.log(res);
+        this.loader.hide();
+
+      }, err => {
+        this.loader.hide();
+        this.errorService.catchError(err);
+
+      });
+    }
+  } 
 }

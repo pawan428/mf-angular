@@ -32,11 +32,7 @@ export class AuthService {
     //console.log(localStorage.getItem('token'));
     return localStorage.getItem('token');
   }
-  getCurrentUser() {
-    // let token = localStorage.getItem('token');
-    // let headers = new HttpHeaders();
-    // headers = headers.set('Content-Type', 'application/json; charset=utf-8');
-    // headers = headers.set('x-access-token', token);
+  getCurrentUser() {    
     return this.http.get(`${uri}/auth/my-profile`).toPromise();
   }
 }

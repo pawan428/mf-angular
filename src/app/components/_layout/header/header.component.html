@@ -67,6 +67,15 @@
             <div class="header-btn-lg pr-0">
                 <div class="widget-content p-0">
                     <div class="widget-content-wrapper" *ngIf="hasLoggedIn; else loginBlock">
+                        <div class="widget-content-right  ml-3 header-user-info" style="text-align: right; padding-right: 10px;">
+                            <div class="widget-heading">
+                                {{currentUser?.firstName}} {{currentUser?.lastName}}
+                            </div>
+                            <div class="widget-subheading">
+                                <!-- {{currentUser?.role}} -->
+                                <i>Investor</i>
+                            </div>
+                        </div>
                         <div class="widget-content-left">
                             <div class="btn-group">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
@@ -75,7 +84,7 @@
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true"
                                     class="dropdown-menu dropdown-menu-right">
-                                    <button type="button" tabindex="0" class="dropdown-item">User Account</button>
+                                    <a routerLink="/user/profile" class="dropdown-item">User Account</a>
                                     <button type="button" tabindex="0" class="dropdown-item">Settings</button>
                                     <h6 tabindex="-1" class="dropdown-header">Header</h6>
                                     <button type="button" tabindex="0" class="dropdown-item">Actions</button>
@@ -88,15 +97,7 @@
                             </div>
 
                         </div>
-                        <div class="widget-content-left  ml-3 header-user-info">
-                            <div class="widget-heading">
-                                {{currentUser?.firstName}} {{currentUser?.lastName}}
-                            </div>
-                            <div class="widget-subheading">
-                                <!-- {{currentUser?.role}} -->
-                                Investor
-                            </div>
-                        </div>
+                       
 
                     </div>
                     <ng-template #loginBlock>

@@ -11,22 +11,30 @@ export class ErrorService {
   @Output() globalError: EventEmitter<ErrorModel> = new EventEmitter();
 
   constructor() { }
-  catchError(err) {
-    throwError(err);
-    this.globalError.next(err);
+  reset() {
+    // let em: ErrorModel = { ok: false, statusText: '' };
+    this.globalError.next(null);
+  }
+  catchError(error) {
+    let em: ErrorModel =error;
+    if (error.status === 0 || error.status === 500) {
+      em.statusText = "Internal Server Error"
+    }
+    this.globalError.next(em);
+    throwError(error);
   }
   handleLoginError(error: HttpErrorResponse) {
-    let em: ErrorModel = { ok: false, message: '' };
+    let em: ErrorModel = { ok: false, statusText: '' };
     em.ok = error.ok;
 
     if (error.status === 0 || error.status === 500) {
-      em.message = "Internal Server Error"
+      em.statusText = "Internal Server Error"
     }
     else if (error.status === 401) {
-      em.message = "Invalid pair of username and password"
+      em.statusText = "Invalid pair of username and password"
     }
     else if (error.status === 404) {
-      em.message = "No user found with this email"
+      em.statusText = "No user found with this email"
     }
     this.catchError(em);
   }

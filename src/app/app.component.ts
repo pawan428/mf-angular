@@ -7,6 +7,7 @@ import { User } from './models/user';
 import { Page } from './models/page';
 import { ErrorService } from './shared/services/error.service';
 import { ErrorModel } from './models/error';
+import { LoaderService } from './shared/services/loader.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,8 +23,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private authService: AuthService,
     private titleService: Title, private activatedRoute: ActivatedRoute,
-    private errorService: ErrorService) {
-
+    private errorService: ErrorService, private loaderService: LoaderService) {
+    this.router.events.subscribe(() => {
+      this.errorService.reset();
+      this.loaderService.hide();
+    })
   }
   ngOnInit() {
     this.authService.getLoggedInfo.subscribe(user => {
@@ -32,7 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
     })
     this.errorService.globalError.subscribe(err => {
       this.globalError = err;
-     
+
       //// uncomment below line to hide globalError box after some time.
       // setTimeout(() => {
       // this.globalError = null;        

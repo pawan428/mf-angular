@@ -1,36 +1,21 @@
-import {
-
-  HttpEvent,
-
-  HttpInterceptor,
-
-  HttpHandler,
-
-  HttpRequest,
-
-  HttpResponse,
-
-  HttpErrorResponse
-
-} from '@angular/common/http';
-
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpEvent, HttpResponse, HttpRequest, HttpHandler, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-
-import { retry, catchError } from 'rxjs/operators';
 import { ErrorService } from '../services/error.service';
-import { Injector } from '@angular/core';
-
-
-
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { LoaderService } from '../services/loader.service';
+@Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-
+  constructor(private errorService: ErrorService, private loader: LoaderService) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     return next.handle(request)
       .pipe(
         //retry(1),
         catchError((error: HttpErrorResponse) => {
-          console.log('pawan');
+          console.log(error);
+         this.errorService.catchError(error);
+         this.loader.hide();
           return throwError(error);
         })
       )

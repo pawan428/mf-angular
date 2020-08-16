@@ -13,9 +13,7 @@ import { LayoutModule } from './modules/layout.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 import { UtilService } from './shared/services/util.service';
-import { ErrorComponent } from './components/error/error.component';
 import { HttpHeaderInterceptor } from './shared/interceptors/http-header.interceptor';
-
 
 //NOTE: dont pass data if want to set it from child component elase if you passed it will show from app component setPageTitle()
 const routes: Routes = [
@@ -26,6 +24,12 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent,
     data: { title: 'Bajaj Capital: Mutual Fund', description: 'helo description for portfolio', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
+
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./modules/user.module').then(m => m.UserModule),
+    data: { title: 'My Profile', description: '', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
 
   },
   {
@@ -62,7 +66,7 @@ const routes: Routes = [
     SharedModule
   ],
   providers: [AuthGuard, Title, UtilService,
-    //{ provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true }
 
   ],

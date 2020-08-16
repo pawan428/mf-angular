@@ -18,11 +18,11 @@
 <div *ngIf="globalError" class="errorBox">
     <div *ngIf="globalError.ok" class="succ">
         <b>SUCCESS! </b>
-        <span>{{globalError.message}}</span>
+        <span>{{globalError.statusText}}</span>
     </div>
     <div *ngIf="!globalError.ok" class="err">
         <b>ERROR! </b>
-        <span>{{globalError.message}}</span>
+        <span>{{globalError.statusText}}</span>
     </div>
     <button (click)="close()" class="close">X</button>
 

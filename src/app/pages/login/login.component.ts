@@ -16,12 +16,11 @@ import { ErrorService } from 'src/app/shared/services/error.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   loginForm: FormGroup;
   error: HttpErrorResponse;
-  test: string = "ttetttsttsts";
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private authService: AuthService, private titleService: Title, private loaderService: LoaderService,
@@ -56,8 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           else {
             localStorage.removeItem("token");
           }
-        }
-          ,
+        },
           (err) => {
             this.errorService.handleLoginError(err);
             this.loaderService.hide();
@@ -69,8 +67,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    this.errorService.catchError(null);
-    this.loaderService.hide();
-  }
+  // ngOnDestroy() {
+  //   this.errorService.reset();
+  //   this.loaderService.hide();
+  // }
 }

@@ -32,11 +32,11 @@ export class UsernameValidator {
                     }
                     ref.loaderService.hide();
                 }
-                // , err => {
-                //     ref.loaderService.hide();
-                //     this.errorService.catchError(err);
+                , err => {
+                    ref.loaderService.hide();
+                    this.errorService.catchError(err);
 
-                )
+                })
             }, 1000);
         })
     }
