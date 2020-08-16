@@ -1,0 +1,29 @@
+<!-- <div *ngIf="error">
+    <div *ngIf="error.ok; else errorMessage" id="errorMsg" class="alert alert-success" role="alert">
+        <strong>SUCCESS!</strong> {{error.statusText}}
+        <button type="button" class="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <ng-template #errorMessage>
+        <div class="alert alert-danger" id="errorMsg" role="alert">
+            <strong>ERROR! </strong> {{error.statusText}}
+            <button type="button" class="close" (click)="hideError()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>        
+    </ng-template>
+</div> -->
+
+<div *ngIf="globalError" class="errorBox">
+    <div *ngIf="globalError.ok" class="succ">
+        <b>SUCCESS! </b>
+        <span>{{globalError.message}}</span>
+    </div>
+    <div *ngIf="!globalError.ok" class="err">
+        <b>ERROR! </b>
+        <span>{{globalError.message}}</span>
+    </div>
+    <button (click)="close()" class="close">X</button>
+
+</div>

@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "mutualfund"
+    }
+  },
+  "defaultProject": "mutualfund",
+  "cli": {
+    "analytics": false
+  }
 }

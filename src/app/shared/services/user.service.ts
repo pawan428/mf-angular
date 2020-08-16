@@ -13,10 +13,13 @@ export class UserService {
     getUser() {
        return this.http.get(`${uri}/users`);
     }
-    getUserById(id: number) {
-       return this.http.get(`${uri}/user/id`);
-    }
+   //  getUserById(id: number) {
+   //     return this.http.get(`${uri}/user/id`);
+   //  }
+    getUserByEmail(email:string) {
+      return this.http.get(`${uri}/user/email/${email}`);
+   }
     postUser(user:User) {
-       return this.http.post(`${uri}/user`,user);
+       return this.http.post(`${uri}/auth/register`,user);
     }
 }

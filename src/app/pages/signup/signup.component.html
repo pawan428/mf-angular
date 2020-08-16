@@ -32,7 +32,7 @@
                         <span class="text-danger" *ngIf="f.email.touched && f.email.errors?.email">
                             Email is not valid
                         </span>
-                        <span class="text-danger" *ngIf="f.email.errors?.usernameUsed===true">
+                        <span class="text-danger" *ngIf="f.email.errors?.emailInUse===true">
                             Email already registered. Please try with another email.
                         </span>                       
                     </div>
@@ -63,7 +63,6 @@
                     <div class="form-group">
                         <button type="submit" class="mb-2 mr-2 btn btn-danger btn-lg btn-block">Register</button>
                     </div>
-                    <div class="alert" *ngIf="error" [ngClass]="{'alert-success': error?.ErrorCode==0, 'alert-danger': error?.ErrorCode!=0}">{{error?.ErrorMessage}}</div>
                 </form>
             </div>
         </div>

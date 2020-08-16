@@ -1,0 +1,32 @@
+.errorBox div
+{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 11;
+    padding: 5px 40px;
+    color: #fff;
+    font-size: 15px;
+    min-height: 60px;
+    text-align: center;
+    padding-top: 15px; 
+}
+.errorBox .err
+{    
+    background-color: #E57373;
+}
+.errorBox .succ
+{    
+    background-color: rgba(101, 255, 178, 0.8);   
+}
+.errorBox .close
+{
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 12;
+    color: #fff;
+    text-shadow: none;
+    font-weight: 100;
+    opacity: 1;
+}

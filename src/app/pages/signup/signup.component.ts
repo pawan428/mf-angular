@@ -4,8 +4,8 @@ import { CustomValidatorService } from 'src/app/shared/validators/custom-validat
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
 import { Title } from '@angular/platform-browser';
 import { UserService } from 'src/app/shared/services/user.service';
-import { Error } from '../../models/error';
-import { User } from 'src/app/models/user';
+import { ErrorService } from 'src/app/shared/services/error.service';
+
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +13,6 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  error: Error;
   registerForm: FormGroup;
   submitted = false;
   constructor(
@@ -21,24 +20,29 @@ export class SignupComponent {
     private customValidator: CustomValidatorService,
     public usernameValidator: UsernameValidator,
     private titleService: Title,
-    private userService: UserService
+    private userService: UserService,
+    private errorService: ErrorService
+
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle('Signup');
-
-    this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email],
-        this.usernameValidator.checkAvailability.bind(this.usernameValidator)],
-      password: ['', Validators.compose([Validators.required, this.customValidator.patternValidator()])],
-      confirmPassword: ['', [Validators.required]],
-    },
-      {
-        validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
-      }
-    );
+    try {
+      this.titleService.setTitle('Signup');
+      this.registerForm = this.fb.group({
+        firstName: ['Pawan', Validators.required],
+        lastName: ['Sharma', Validators.required],
+        email: ['pawan@gmail.comm', [Validators.required, Validators.email],
+          this.usernameValidator.checkAvailability.bind(this.usernameValidator)],
+        password: ['Pawan@123', Validators.compose([Validators.required, this.customValidator.patternValidator()])],
+        confirmPassword: ['Pawan@123', [Validators.required]],
+      },
+        {
+          validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
+        }
+      );
+    } catch (err) {
+      this.errorService.catchError(err);
+    }
   }
   get f() {
     return this.registerForm.controls;
@@ -46,16 +50,12 @@ export class SignupComponent {
 
   onSubmit() {
     this.submitted = true;
-    if (this.registerForm.valid) {
-      let user:User=this.registerForm.value;
-      user.role="user";
-      
-      this.userService.postUser(this.registerForm.value).subscribe(res => {
-        this.error = res[0];
-        if (this.error.errorCode == 0) {
-          this.registerForm.reset();
-        }
-      });
-    }
+    //if (this.registerForm.valid) {
+    this.userService.postUser(this.registerForm.value).subscribe(res => {
+      console.log(res);
+    }, err => {
+      this.errorService.catchError(err);
+    });
+    // }
   }
 }

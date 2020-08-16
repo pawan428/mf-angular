@@ -10,6 +10,11 @@ import { AuthGuard } from './shared/services/auth.guard';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './modules/shared.module';
 import { LayoutModule } from './modules/layout.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
+import { UtilService } from './shared/services/util.service';
+import { ErrorComponent } from './components/error/error.component';
+import { HttpHeaderInterceptor } from './shared/interceptors/http-header.interceptor';
 
 
 //NOTE: dont pass data if want to set it from child component elase if you passed it will show from app component setPageTitle()
@@ -46,16 +51,21 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,   
+    HomeComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
+    HttpClientModule,
     CommonModule,
     BrowserModule,
     LayoutModule,
     SharedModule
   ],
-  providers: [AuthGuard, Title],
+  providers: [AuthGuard, Title, UtilService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

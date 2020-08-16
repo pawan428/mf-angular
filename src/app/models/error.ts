@@ -1,4 +1,4 @@
-export interface Error {
-    errorCode: number
-    errorMessage: string
+export interface ErrorModel {
+    ok: boolean
+    message: string
 }

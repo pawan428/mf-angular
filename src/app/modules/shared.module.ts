@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NumOnlyDirective } from '../shared/directives/num-only.directive';
 import { PurchaseModalComponent } from '../components/purchase-modal/purchase-modal.component';
 import { RedeemModalComponent } from '../components/redeem-modal/redeem-modal.component';
-import { HttpClientModule } from '@angular/common/http';
+import { ErrorComponent } from '../components/error/error.component';
 
 
 @NgModule({
@@ -22,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     SchemeListComponent,
     PurchaseModalComponent,
     RedeemModalComponent,
-
+    ErrorComponent,  
+    
     //pipes
     URLFriendlyPipe,
     //directives
@@ -35,15 +36,15 @@ import { HttpClientModule } from '@angular/common/http';
     ActionButtonComponent,
     SchemeListComponent,
     PurchaseModalComponent,
-    RedeemModalComponent,    
+    RedeemModalComponent,     
+    ErrorComponent,     
   ],
 
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

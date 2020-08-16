@@ -1,26 +1,32 @@
 <div class="row">
-    <div class="col-md-5 login-card">
+    <div class="col-md-4 login-card">
         <div class="main-card mb-12 card">
-            <div class="card-body">               
+            <div class="card-body">
                 <div class="card-title">
-                    <h5> INVESTOR LOGIN</h5>
+                    <h5> LOGIN</h5>
                 </div>
                 <p>Don't have an account with us? <a routerLink="/auth/signup">Click here</a></p>
-                <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-                    <div class="position-relative form-group">
-                        <input required name="username" placeholder="Email" type="email"
-                            class="form-control">
+                <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <input formControlName="username" placeholder="Email" type="email" class="form-control">
+                        <span class="text-danger" *ngIf="submitted && f.username.errors?.required">
+                            Email is required
+                        </span>
+                        <span class="text-danger" *ngIf="f.username.touched && f.username.errors?.email">
+                            Email is not valid
+                        </span>
                     </div>
-                    <div class="position-relative form-group">
-                        <input required name="password" placeholder="password" type="password"
-                            class="form-control">
+                    <div class="form-group">
+                        <input formControlName="password" placeholder="Password" type="password" class="form-control">
+                        <span class="text-danger" *ngIf="submitted && f.password.errors?.required">
+                            Password is required
+                        </span>                       
                     </div>
-
-                    <button class="mb-2 mr-2 btn btn-danger btn-lg btn-block"
-                        >Login</button>
+                    <button type="submit" class="mb-2 mr-2 btn btn-danger btn-lg btn-block">Login</button>
                     <div class="card-footer"><a href="javascript:void(0);" style="color: #9ea4a9" class="card-link">
                             Forgot your Password?</a></div>
                 </form>
+                
             </div>
         </div>
     </div>

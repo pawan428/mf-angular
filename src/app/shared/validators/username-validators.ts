@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LoaderService } from '../services/loader.service';
 import { TestBed } from '@angular/core/testing';
+import { UserService } from '../services/user.service';
+import { error } from 'protractor';
+import { throwError } from 'rxjs';
+import { ErrorService } from '../services/error.service';
 
 @Injectable()
 export class UsernameValidator {
 
     debouncer: any;
 
-    constructor(private loaderService: LoaderService) {
+    constructor(private loaderService: LoaderService, private userService: UserService, private errorService: ErrorService) {
 
     }
 
@@ -18,33 +22,23 @@ export class UsernameValidator {
         let ref = this;
         return new Promise(resolve => {
             this.debouncer = setTimeout(() => {
-                this.loaderService.show('Checking Availability',false);
-                let avlPromise = this.isAvailable(control.value);
-                avlPromise.then(function (avl) {
+                this.loaderService.show('Checking Availability', false);
+                this.userService.getUserByEmail(control.value).subscribe(avl => {
                     if (avl) {
-                        resolve(null);
+                        resolve({ 'emailInUse': true });
                     }
                     else {
-                        resolve({ 'usernameUsed': true });
+                        resolve(null);
                     }
                     ref.loaderService.hide();
-                })
+                }
+                // , err => {
+                //     ref.loaderService.hide();
+                //     this.errorService.catchError(err);
+
+                )
             }, 1000);
         })
     }
 
-    isAvailable(val) {
-        //call here api to check value from database.
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                let bool;
-                if (val !== "test@test.com")
-                    bool = true;
-                else
-                    bool = false;
-
-                resolve(bool);
-            }, 2000);
-        })
-    }
 }
