@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.titleService.setTitle('Login');
-
     this.loginForm = this.fb.group({
       username: ['pawan@gmail.com', [Validators.required, Validators.email]],
       password: ['Pawan@123', Validators.required]
@@ -57,14 +56,13 @@ export class LoginComponent implements OnInit, OnDestroy {
           else {
             localStorage.removeItem("token");
           }
-          this.loaderService.hide();
         }
           ,
-            (err) => {
-              this.errorService.catchError(err);
-              this.loaderService.hide();
-            
-            });
+          (err) => {
+            this.errorService.handleLoginError(err);
+            this.loaderService.hide();
+
+          });
       }
     } catch (error) {
       this.errorService.catchError(error);
@@ -72,6 +70,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    //this.authService.ge
+    this.errorService.catchError(null);
+    this.loaderService.hide();
   }
 }

@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Token } from '@angular/compiler/src/ml_parser/lexer';
 const uri = environment.uri;
 
 @Injectable({
@@ -28,7 +29,8 @@ export class AuthService {
   }
   getAccessToken()
   {
-    return "pawaana";//localStorage.getItem('token');
+    //console.log(localStorage.getItem('token'));
+    return localStorage.getItem('token');
   }
   getCurrentUser() {
     // let token = localStorage.getItem('token');

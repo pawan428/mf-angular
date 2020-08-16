@@ -6,19 +6,15 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class HttpHeaderInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
   intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let token =this.authService.getAccessToken();
- 
-    //const token = await this.authService.getAccessToken();
-    //let changedRequest = request;
-    // HttpHeader object immutable - copy values
+    let token = this.authService.getAccessToken();
     const headerSettings: { [name: string]: string | string[]; } = {};
     headerSettings['Content-Type'] = 'application/json';
-    headerSettings['x-access-token'] = token;
+    headerSettings['x-access-token'] = token || "";
 
 
     const newHeader = new HttpHeaders(headerSettings);
-    return next.handle(httpRequest.clone({headers: newHeader}));
+    return next.handle(httpRequest.clone({ headers: newHeader }));
   }
 }

@@ -62,7 +62,7 @@ const routes: Routes = [
     SharedModule
   ],
   providers: [AuthGuard, Title, UtilService,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    //{ provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true }
 
   ],
