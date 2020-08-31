@@ -5,14 +5,14 @@ import { TestBed } from '@angular/core/testing';
 import { UserService } from '../services/user.service';
 import { error } from 'protractor';
 import { throwError } from 'rxjs';
-import { ErrorService } from '../services/error.service';
+import { MessageService } from '../services/message.service';
 
 @Injectable()
 export class UsernameValidator {
 
     debouncer: any;
 
-    constructor(private loaderService: LoaderService, private userService: UserService, private errorService: ErrorService) {
+    constructor(private loaderService: LoaderService, private userService: UserService, private messageService: MessageService) {
 
     }
 
@@ -34,7 +34,7 @@ export class UsernameValidator {
                 }
                 , err => {
                     ref.loaderService.hide();
-                    this.errorService.catchError(err);
+                    this.messageService.showMessage(err);
 
                 })
             }, 1000);

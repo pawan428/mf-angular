@@ -4,8 +4,9 @@ import { CustomValidatorService } from 'src/app/shared/validators/custom-validat
 import { UsernameValidator } from 'src/app/shared/validators/username-validators';
 import { Title } from '@angular/platform-browser';
 import { UserService } from 'src/app/shared/services/user.service';
-import { ErrorService } from 'src/app/shared/services/error.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
+import { ResponseModel } from 'src/app/models/response';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class SignupComponent {
     public usernameValidator: UsernameValidator,
     private titleService: Title,
     private userService: UserService,
-    private errorService: ErrorService,
+    private messageService: MessageService,
     private loader: LoaderService
 
   ) { }
@@ -33,7 +34,7 @@ export class SignupComponent {
       this.registerForm = this.fb.group({
         firstName: ['Pawan', Validators.required],
         lastName: ['Sharma', Validators.required],
-        email: ['pawan@gmail.comm', [Validators.required, Validators.email],
+        email: ['', [Validators.required, Validators.email],
           this.usernameValidator.checkAvailability.bind(this.usernameValidator)],
         password: ['Pawan@123', Validators.compose([Validators.required, this.customValidator.patternValidator()])],
         confirmPassword: ['Pawan@123', [Validators.required]],
@@ -43,7 +44,7 @@ export class SignupComponent {
         }
       );
     } catch (err) {
-      this.errorService.catchError(err);
+      this.messageService.showMessage(err);
     }
   }
   get f() {
@@ -55,14 +56,23 @@ export class SignupComponent {
     if (this.registerForm.valid) {
       this.loader.show('Submitting, Please wait', true);
       this.userService.postUser(this.registerForm.value).subscribe(res => {
-        console.log(res);
+        let msg: ResponseModel = { ok: res && res["auth"], statusText: '' }
+        if (res && res["auth"]) {
+          msg.statusText = 'User Registration Successful';
+          this.registerForm.reset();
+          this.submitted=false;
+        }
+        else
+          msg.statusText = 'User Registration Failed';
+
+        this.messageService.showMessage(msg);
         this.loader.hide();
 
       }, err => {
         this.loader.hide();
-        this.errorService.catchError(err);
-
+        this.messageService.showMessage(err);
+console.log('err',err);
       });
     }
-  } 
+  }
 }

@@ -64,10 +64,11 @@
             </ul>
         </div>
         <div class="app-header-right">
-            <div class="header-btn-lg pr-0">
+            <div class="header-btn-lg pr-0" *ngIf="hasLoggedIn; else loginBlock">
                 <div class="widget-content p-0">
-                    <div class="widget-content-wrapper" *ngIf="hasLoggedIn; else loginBlock">
-                        <div class="widget-content-right  ml-3 header-user-info" style="text-align: right; padding-right: 10px;">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-right  ml-3 header-user-info"
+                            style="text-align: right; padding-right: 10px;">
                             <div class="widget-heading">
                                 {{currentUser?.firstName}} {{currentUser?.lastName}}
                             </div>
@@ -97,22 +98,24 @@
                             </div>
 
                         </div>
-                       
-
                     </div>
-                    <ng-template #loginBlock>
-
-                        <ul class="header-menu nav">
-                            <li class="nav-item">
-                                <a href="javascript:void(0);" class=" btn btn-danger" routerLink="/auth/login">
-                                    <i class="nav-link-icon fa fa-user"> </i>&nbsp;
-                                    Login
-                                </a>
-                            </li>
-                        </ul>
-                    </ng-template>
                 </div>
             </div>
-        </div>
 
+            <ng-template #loginBlock>
+                
+                <ul class="header-menu nav">
+                    <li class="nav-item">
+                        <!-- <a href="javascript:void(0);" class="nav-link" routerLink="/auth/login">
+                            <i class="nav-link-icon fa fa-user"> </i>&nbsp;
+                            Login
+                        </a> -->
+                        <a routerLink="/auth/login" class="mb-2 mr-2 border-0 btn-transition btn btn-lg btn-outline-light">
+                            <i class="nav-link-icon fa fa-user"></i>&nbsp; Login
+                        </a>
+                       
+                    </li>
+                </ul>
+            </ng-template>
+        </div>
     </div>

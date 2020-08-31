@@ -1,4 +1,4 @@
-export interface ErrorModel {
+export interface ResponseModel {
     ok: boolean
     statusText: string
 }

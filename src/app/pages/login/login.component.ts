@@ -9,14 +9,14 @@ import { User } from 'src/app/models/user';
 import { CustomValidatorService } from 'src/app/shared/validators/custom-validator.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UtilService } from 'src/app/shared/services/util.service';
-import { ErrorModel } from 'src/app/models/error';
-import { ErrorService } from 'src/app/shared/services/error.service';
+import { ResponseModel } from 'src/app/models/response';
+import { MessageService } from 'src/app/shared/services/message.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy{
   submitted = false;
   returnUrl: string;
   loginForm: FormGroup;
@@ -24,10 +24,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private authService: AuthService, private titleService: Title, private loaderService: LoaderService,
-    private errorService: ErrorService
-  ) {
-  }
+    private messageService: MessageService
+  ) { }
+  
   ngOnInit() {
+
     this.titleService.setTitle('Login');
     this.loginForm = this.fb.group({
       username: ['pawan@gmail.com', [Validators.required, Validators.email]],
@@ -42,10 +43,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     try {
-      // JSON.parse('sa');
+      //JSON.parse('sa');
       this.submitted = true;
       if (this.loginForm.valid) {
-        this.loaderService.show('Logging in, please wait!', true);
+        this.loaderService.show('Validating...', true);
         let req = this.loginForm.value;
         this.authService.login(req["username"], req["password"]).subscribe((res: HttpErrorResponse) => {
           if (res["auth"]) {
@@ -57,18 +58,18 @@ export class LoginComponent implements OnInit {
           }
         },
           (err) => {
-            this.errorService.handleLoginError(err);
+            this.messageService.showMessage(err);
             this.loaderService.hide();
 
           });
       }
     } catch (error) {
-      this.errorService.catchError(error);
+      this.messageService.showMessage({ok:false, statusText:"Something went wrong!"});
     }
   }
 
-  // ngOnDestroy() {
-  //   this.errorService.reset();
-  //   this.loaderService.hide();
-  // }
+  ngOnDestroy() {
+    this.messageService.reset();
+    this.loaderService.hide();
+  }
 }

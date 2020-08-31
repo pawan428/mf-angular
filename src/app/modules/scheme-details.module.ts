@@ -7,7 +7,7 @@ import { SchemeDetailsComponent } from '../pages/scheme-details/scheme-details.c
 const routes: Routes = [
   {
     path: ':name', component: SchemeDetailsComponent, canActivate: [AuthGuard]
-  }
+      }
 ]
 @NgModule({
   declarations: [SchemeDetailsComponent],

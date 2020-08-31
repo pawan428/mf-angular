@@ -14,16 +14,33 @@
         </div>        
     </ng-template>
 </div> -->
-
-<div *ngIf="globalError" class="errorBox">
-    <div *ngIf="globalError.ok" class="succ">
-        <b>SUCCESS! </b>
-        <span>{{globalError.statusText}}</span>
+<div *ngIf="globalMessage">
+    <div *ngIf="!globalMessage.ok" id="toast-container" class="toast-top-right">
+        <div class="toast toast-error" aria-live="polite">
+            <button type="button" class="toast-close-button"
+                role="button" (click)="close()">×</button>
+            <div class="toast-title">ERROR</div>
+            <div class="toast-message">{{globalMessage.statusText}}</div>
+        </div>
     </div>
-    <div *ngIf="!globalError.ok" class="err">
-        <b>ERROR! </b>
-        <span>{{globalError.statusText}}</span>
+
+    <div *ngIf="globalMessage.ok" id="toast-container" class="toast-top-right">
+        <div class="toast toast-success" aria-live="polite">
+            <button type="button" class="toast-close-button"
+                role="button" (click)="close()">×</button>
+            <div class="toast-title">SUCCESS</div>
+            <div class="toast-message">{{globalMessage.statusText}}</div>
+        </div>
+    </div>
+</div>
+<!-- <div *ngIf="globalMessage" class="errorBox">
+    <div *ngIf="globalMessage.ok" class="succ">
+        <span>SUCCESS! </span>
+        <span>{{globalMessage.statusText}}</span>
+    </div>
+    <div *ngIf="!globalMessage.ok" class="err">
+        <span>OOPS! </span>
+        <span>{{globalMessage.statusText}}</span>
     </div>
     <button (click)="close()" class="close">X</button>
-
-</div>
+</div> -->

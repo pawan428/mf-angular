@@ -1,21 +1,32 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ErrorModel } from 'src/app/models/error';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { ResponseModel } from 'src/app/models/response';
+import { MessageService } from 'src/app/shared/services/message.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-error',
   templateUrl: './error.component.html',
   styleUrls: ['./error.component.css'],
 })
-export class ErrorComponent implements OnInit {
-  @Input() globalError: ErrorModel;
-  constructor() {
-  }
-  
-  ngOnInit() {
+export class ErrorComponent implements OnInit, OnDestroy {
+  //@Input() globalMessage: ResponseModel;
 
+  globalMessage: ResponseModel
+  msgSubscription: Subscription;
+  constructor(private msgService: MessageService) {
   }
-  
+
+  ngOnInit() {
+    this.msgSubscription = this.msgService.globalMessage.subscribe(m => {
+      this.globalMessage = m;
+    });
+  }
+
   close() {
-    this.globalError=null;    
+    this.globalMessage = null;
+    //this.msgSubscription.unsubscribe();
+  }
+  ngOnDestroy() {
+    this.msgSubscription.unsubscribe();
   }
 }

@@ -14,9 +14,9 @@ export class ActionButtonComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectScheme(val)
+  selectScheme(scheme)
   {
     //this.loadScheme=val;
-    this.loadScheme.emit(val);
+    this.loadScheme.emit(scheme);
   }
 }
