@@ -56,15 +56,10 @@ export class LoginComponent implements OnInit, OnDestroy{
           else {
             localStorage.removeItem("token");
           }
-        },
-          (err) => {
-            this.messageService.showMessage(err);
-            this.loaderService.hide();
-
-          });
+        })
       }
     } catch (error) {
-      this.messageService.showMessage({ok:false, statusText:"Something went wrong!"});
+      this.messageService.showMessage({ok:false, message:"Something went wrong!"});
     }
   }
 

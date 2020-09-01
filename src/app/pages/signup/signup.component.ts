@@ -56,14 +56,14 @@ export class SignupComponent {
     if (this.registerForm.valid) {
       this.loader.show('Submitting, Please wait', true);
       this.userService.postUser(this.registerForm.value).subscribe(res => {
-        let msg: ResponseModel = { ok: res && res["auth"], statusText: '' }
+        let msg: ResponseModel = { ok: res && res["auth"], message: '' }
         if (res && res["auth"]) {
-          msg.statusText = 'User Registration Successful';
+          msg.message = 'User Registration Successful';
           this.registerForm.reset();
           this.submitted=false;
         }
         else
-          msg.statusText = 'User Registration Failed';
+          msg.message = 'User Registration Failed';
 
         this.messageService.showMessage(msg);
         this.loader.hide();

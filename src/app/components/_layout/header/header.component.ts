@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit {
 
   async logout() {
     await this.authService.logout().then(() => {
-     // this.messageService.showMessage({ ok: true, statusText: "You have logged out successfully" });
       this.router.navigate(['/auth/login']);
     });
   }

@@ -72,14 +72,12 @@ export class AppComponent implements OnInit, OnDestroy {
         }
         return appTitle;
       })).subscribe((title: string) => {
-        console.log(title);
         const child = this.activatedRoute.firstChild;
         let page = new Page();
         page.title = child.snapshot.data['title'];
         page.heading = child.snapshot.data['title']; //use title by default in page Heading.
         page.description = child.snapshot.data['description'];
         page.icon = child.snapshot.data['icon'];
-        console.log(child);
         //console.log(child.snapshot.data["title"]);
 
         // //check if getting blank from router then getting it from that perticluar component.
@@ -92,8 +90,6 @@ export class AppComponent implements OnInit, OnDestroy {
             page.description = storage["description"]
             page.icon = storage["icon"]
             title = page.title;
-            console.log(mypage);
-
           }
         }
         this.page = page;

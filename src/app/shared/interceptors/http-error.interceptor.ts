@@ -13,7 +13,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       .pipe(
         //retry(1),
         catchError((error: HttpErrorResponse) => {
-          console.log(error);
          this.messageService.showMessage(error);
          this.loader.hide();
           return throwError(error);

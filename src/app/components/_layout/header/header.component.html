@@ -87,13 +87,9 @@
                                     class="dropdown-menu dropdown-menu-right">
                                     <a routerLink="/user/profile" class="dropdown-item">User Account</a>
                                     <button type="button" tabindex="0" class="dropdown-item">Settings</button>
-                                    <h6 tabindex="-1" class="dropdown-header">Header</h6>
-                                    <button type="button" tabindex="0" class="dropdown-item">Actions</button>
-                                    <div tabindex="-1" class="dropdown-divider"></div>
-                                    <div class="nav-item-btn nav-item">
-                                        <button type="button" tabindex="0"
-                                            class="btn-wide btn-shadow btn btn-danger btn-sm"
-                                            (click)="logout()">Logout</button></div>
+                                    <button type="button" tabindex="0" class="dropdown-item"
+                                        (click)="logout()">Logout</button>
+
                                 </div>
                             </div>
 
@@ -103,17 +99,18 @@
             </div>
 
             <ng-template #loginBlock>
-                
+
                 <ul class="header-menu nav">
                     <li class="nav-item">
                         <!-- <a href="javascript:void(0);" class="nav-link" routerLink="/auth/login">
                             <i class="nav-link-icon fa fa-user"> </i>&nbsp;
                             Login
                         </a> -->
-                        <a routerLink="/auth/login" class="mb-2 mr-2 border-0 btn-transition btn btn-lg btn-outline-light">
+                        <a routerLink="/auth/login"
+                            class="mb-2 mr-2 border-0 btn-transition btn btn-lg btn-outline-light">
                             <i class="nav-link-icon fa fa-user"></i>&nbsp; Login
                         </a>
-                       
+
                     </li>
                 </ul>
             </ng-template>
