@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./modules/user.module').then(m => m.UserModule),
-    data: { title: 'My Profile', description: '', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
+    data: { title: 'My Profile', description: '', icon: 'pe-7s-id icon-gradient bg-plum-plate' }
 
   },
   {

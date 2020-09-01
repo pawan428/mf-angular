@@ -80,12 +80,13 @@
                         <div class="widget-content-left">
                             <div class="btn-group">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                    <img width="42" class="rounded-circle" src="assets/images/avatars/2.jpg" alt="">
+                                    <!-- <img width="42" class="rounded-circle" src="assets/images/avatars/2.jpg" alt=""> -->
+                                    <div class="rounded-text">{{currentUser.firstName.substring(0,1)}}</div>
                                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                 </a>
                                 <div tabindex="-1" role="menu" aria-hidden="true"
                                     class="dropdown-menu dropdown-menu-right">
-                                    <a routerLink="/user/profile" class="dropdown-item">User Account</a>
+                                    <a routerLink="/user/profile" class="dropdown-item">My Profile</a>
                                     <button type="button" tabindex="0" class="dropdown-item">Settings</button>
                                     <button type="button" tabindex="0" class="dropdown-item"
                                         (click)="logout()">Logout</button>

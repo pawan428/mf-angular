@@ -1,0 +1,14 @@
+.rounded-text
+{
+    border-radius: 10px !important;
+    width: 120px;
+    background: #57abff;
+    height: 120px;
+    float: left;
+    color:#fff;
+    line-height: 115px;
+    font-size: 58px;
+    text-align: center;
+    text-shadow: 0 0 black;
+    margin-right: 30px;
+}

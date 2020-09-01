@@ -11,8 +11,7 @@ import { LoaderService } from 'src/app/shared/services/loader.service';
 export class SchemeDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private loader:LoaderService) {
-    this.loader.show('',true);
-
+    this.loader.show();
     this.setPageTitle();
     this.loader.hide();
 

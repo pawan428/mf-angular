@@ -54,24 +54,18 @@ export class SignupComponent {
   onSubmit() {
     this.submitted = true;
     if (this.registerForm.valid) {
-      this.loader.show('Submitting, Please wait', true);
+      this.loader.showText('Processing...');
       this.userService.postUser(this.registerForm.value).subscribe(res => {
         let msg: ResponseModel = { ok: res && res["auth"], message: '' }
         if (res && res["auth"]) {
           msg.message = 'User Registration Successful';
           this.registerForm.reset();
-          this.submitted=false;
+          this.submitted = false;
         }
         else
           msg.message = 'User Registration Failed';
-
         this.messageService.showMessage(msg);
         this.loader.hide();
-
-      }, err => {
-        this.loader.hide();
-        this.messageService.showMessage(err);
-console.log('err',err);
       });
     }
   }

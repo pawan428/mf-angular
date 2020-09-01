@@ -16,7 +16,6 @@ export class LoaderComponent implements OnInit, OnDestroy {
       if (l) {
         this.text = l.text;
         this.visible = l.visible;
-        this.fullpage = l.fullpage;
       }
     });
   }

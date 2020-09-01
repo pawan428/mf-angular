@@ -20,12 +20,14 @@ export class MessageService {
     if (error.status === 0 || error.status === 500) {
       em.message = "Internal Server Error"; //set common error
     }
-    if (error.ok) {
+    if (error.ok) { // for success
       setTimeout(() => {
         this.reset()
       }, 3000);
     }
-    console.log(em);
+    else { // for http error response
+      em.message = error.error;
+    }
     this.globalMessage.next(em);
   }
 }

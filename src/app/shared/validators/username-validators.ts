@@ -22,7 +22,7 @@ export class UsernameValidator {
         let ref = this;
         return new Promise(resolve => {
             this.debouncer = setTimeout(() => {
-                this.loaderService.show('Checking Availability', false);
+                this.loaderService.showText('Checking Availability');
                 this.userService.getUserByEmail(control.value).subscribe(avl => {
                     if (avl) {
                         resolve({ 'emailInUse': true });
@@ -31,12 +31,7 @@ export class UsernameValidator {
                         resolve(null);
                     }
                     ref.loaderService.hide();
-                }
-                , err => {
-                    ref.loaderService.hide();
-                    this.messageService.showMessage(err);
-
-                })
+                })               
             }, 1000);
         })
     }

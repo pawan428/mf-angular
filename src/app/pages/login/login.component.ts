@@ -11,6 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UtilService } from 'src/app/shared/services/util.service';
 import { ResponseModel } from 'src/app/models/response';
 import { MessageService } from 'src/app/shared/services/message.service';
+import { error } from 'protractor';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -46,9 +47,10 @@ export class LoginComponent implements OnInit, OnDestroy{
       //JSON.parse('sa');
       this.submitted = true;
       if (this.loginForm.valid) {
-        this.loaderService.show('Validating...', true);
+        this.loaderService.showText('Validating...');
         let req = this.loginForm.value;
         this.authService.login(req["username"], req["password"]).subscribe((res: HttpErrorResponse) => {
+          console.log('res',res);
           if (res["auth"]) {
             localStorage.setItem("token", res["token"]);
             this.router.navigateByUrl(this.returnUrl);
@@ -56,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy{
           else {
             localStorage.removeItem("token");
           }
-        })
+        });
       }
     } catch (error) {
       this.messageService.showMessage({ok:false, message:"Something went wrong!"});

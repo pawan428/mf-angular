@@ -13,7 +13,7 @@ export class HoldingsComponent implements OnInit {
   constructor(private loaderService: LoaderService) { }
 
   ngOnInit() {
-    this.loaderService.show('Loading your Holdings, Please Wait...', true);
+    this.loaderService.show();
     setTimeout(() => {
       this.schemeList = [
         { id: 1, schemeName: "HDFC top 100 Equity Fund", cmv: 60000, imgPath: "1.jpg", investedAmount: 50000 },

@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  user={};
+  user;
   constructor(private auth: AuthService) { }
 
   ngOnInit() {
@@ -16,5 +16,4 @@ export class UserProfileComponent implements OnInit {
       this.user = user;      
     });
   }
-
 }
