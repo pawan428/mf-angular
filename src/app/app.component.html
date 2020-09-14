@@ -1,21 +1,21 @@
 <app-loader></app-loader>
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-  <app-error></app-error>  
-  
+  <app-error></app-error>
+
   <app-header [currentUser]="currentUser" [hasLoggedIn]="hasLoggedIn"></app-header>
 
   <div class="loader" *ngIf="headerLoader">
     <div class="loader__element"></div>
   </div>
 
-  <div class="app-main">   
+  <div class="app-main">
     <app-side-nav [hasLoggedIn]="hasLoggedIn"></app-side-nav>
     <div class="app-main__outer" [ngClass]="{'side-nav-active': hasLoggedIn===false}">
-      <div class="app-main__inner">
         <app-page-title [page]="page" *ngIf="hasLoggedIn"></app-page-title>
-        <router-outlet></router-outlet>
-      </div>
+        <!-- <div class="m-15"> -->
+          <router-outlet></router-outlet>
+        <!-- </div> -->
+      
     </div>
-  </div><br><br>
-  <app-footer></app-footer>
+  </div>
 </div>

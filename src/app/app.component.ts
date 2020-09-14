@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private authService: AuthService,
     private titleService: Title, private activatedRoute: ActivatedRoute,
-    private messageService: MessageService, private loaderService: LoaderService) {
+    private messageService: MessageService) {
     //show loader while navigating to other route
     this.router.events.subscribe(() => {
       this.messageService.reset();

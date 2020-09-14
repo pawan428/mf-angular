@@ -17,16 +17,19 @@ export class MessageService {
   }
   showMessage(error) {
     let em: ResponseModel = error;
-    if (error.status === 0 || error.status === 500) {
-      em.message = "Internal Server Error"; //set common error
-    }
+
     if (error.ok) { // for success
       setTimeout(() => {
         this.reset()
       }, 3000);
     }
     else { // for http error response
-      em.message = error.error;
+      if (error.status === 0 || error.status === 500 || typeof error.error == "object") {
+        em.message = "Internal Server Error"; //set common error
+      }
+      else {
+        em.message = error.error;
+      }
     }
     this.globalMessage.next(em);
   }

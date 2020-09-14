@@ -17,7 +17,7 @@ import { error } from 'protractor';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy{
+export class LoginComponent implements OnInit, OnDestroy {
   submitted = false;
   returnUrl: string;
   loginForm: FormGroup;
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     private authService: AuthService, private titleService: Title, private loaderService: LoaderService,
     private messageService: MessageService
   ) { }
-  
+
   ngOnInit() {
 
     this.titleService.setTitle('Login');
@@ -49,8 +49,8 @@ export class LoginComponent implements OnInit, OnDestroy{
       if (this.loginForm.valid) {
         this.loaderService.showText('Validating...');
         let req = this.loginForm.value;
+
         this.authService.login(req["username"], req["password"]).subscribe((res: HttpErrorResponse) => {
-          console.log('res',res);
           if (res["auth"]) {
             localStorage.setItem("token", res["token"]);
             this.router.navigateByUrl(this.returnUrl);
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy{
         });
       }
     } catch (error) {
-      this.messageService.showMessage({ok:false, message:"Something went wrong!"});
+      this.messageService.showMessage({ ok: false, message: "Something went wrong!" });
     }
   }
 

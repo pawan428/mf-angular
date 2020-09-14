@@ -39,3 +39,9 @@
   @keyframes getWidth {
       100% { width: 100%; }
   }
+  .m-15
+  {
+    margin-left:-15px;
+    margin-right:-15px;
+
+  }

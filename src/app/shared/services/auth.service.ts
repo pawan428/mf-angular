@@ -1,10 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from 'src/app/models/user';
-import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Token } from '@angular/compiler/src/ml_parser/lexer';
+import { HttpClient } from '@angular/common/http';
+
 const uri = environment.uri;
 
 @Injectable({

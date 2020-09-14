@@ -22,9 +22,10 @@ const routes: Routes = [
     loadChildren: () => import('./modules/prelogin.module').then(m => m.PreloginModule)
   },
   {
-    path: 'home', component: HomeComponent,
+ 
+        path: 'home',
+        component: HomeComponent,
     data: { title: 'Bajaj Capital: Mutual Fund', description: 'helo description for portfolio', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
-
   },
   {
     path: 'user',
@@ -47,7 +48,6 @@ const routes: Routes = [
     path: 'scheme-details',
     loadChildren: () => import('./modules/scheme-details.module').then(m => m.SchemeDetailsModule)
   },
-
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
