@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  uri:'http://localhost:3000'
+  googleSecretKey:'1019758367150-ob2rfobsijnurmrdf44ifghphg6flbo1.apps.googleusercontent.com',
+  uri:'http://localhost:3000',
+
 };
 
 /*

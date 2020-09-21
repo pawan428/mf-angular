@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule, Title } from '@angular/platform-browser';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+  AmazonLoginProvider,
+} from 'angularx-social-login';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -22,9 +28,9 @@ const routes: Routes = [
     loadChildren: () => import('./modules/prelogin.module').then(m => m.PreloginModule)
   },
   {
- 
-        path: 'home',
-        component: HomeComponent,
+
+    path: 'home',
+    component: HomeComponent,
     data: { title: 'Bajaj Capital: Mutual Fund', description: 'helo description for portfolio', icon: 'pe-7s-wallet icon-gradient bg-plum-plate' }
   },
   {
@@ -60,6 +66,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     HttpClientModule,
+    SocialLoginModule,
     CommonModule,
     BrowserModule,
     LayoutModule,
@@ -67,8 +74,31 @@ const routes: Routes = [
   ],
   providers: [AuthGuard, Title, UtilService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true }
-
+    { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '1019758367150-ob2rfobsijnurmrdf44ifghphg6flbo1.apps.googleusercontent.com'
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId'),
+          },
+          {
+            id: AmazonLoginProvider.PROVIDER_ID,
+            provider: new AmazonLoginProvider(
+              'clientId'
+            ),
+          },
+        ],
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

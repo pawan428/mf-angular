@@ -17,11 +17,11 @@ export class MessageService {
   }
   showMessage(error) {
     let em: ResponseModel = error;
-
     if (error.ok) { // for success
-      setTimeout(() => {
-        this.reset()
-      }, 3000);
+      em.message = error.message;
+      // setTimeout(() => {
+      //   this.reset()
+      // }, 3000);
     }
     else { // for http error response
       if (error.status === 0 || error.status === 500 || typeof error.error == "object") {
@@ -31,6 +31,8 @@ export class MessageService {
         em.message = error.error;
       }
     }
+
     this.globalMessage.next(em);
+    console.log(em);
   }
 }

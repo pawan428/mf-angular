@@ -1,5 +1,4 @@
-<div class="app-main__inner">
-    <div class="row">
+
         <div class="col-md-4 login-card">
             <div class="main-card mb-12 card">
                 <div class="card-body">
@@ -10,10 +9,10 @@
                         <br>
                         <h5>Login to Mutual Fund</h5>
                         <div class="social-container">
-                            <a href="#" class="social"><i class="fa fa-user" aria-hidden="true"></i></a>
+                            <a class="social" (cloick)="signInWithGoogle()"><img src="../../../assets/images/google.png"></a>
                             <a href="#" class="social"><i class="fa fa-car"  aria-hidden="true"></i></a>
                         </div>
-                        <span>or use your account</span>
+                        <span class="or" >or use your account</span>
                         <div class="form-group">
                             <input formControlName="username" placeholder="Email" type="email">
                             <span class="text-danger" *ngIf="submitted && f.username.errors?.required">
@@ -36,5 +35,3 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>

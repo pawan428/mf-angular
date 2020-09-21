@@ -7,7 +7,8 @@ const uri = environment.uri;
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class
+  AuthService {
   @Output() getLoggedInfo: EventEmitter<any> = new EventEmitter();
   constructor(private http: HttpClient) { }
   login(username: string, password: string) {
@@ -17,19 +18,22 @@ export class AuthService {
   logout() {
     let promise = new Promise((resolve, reject) => {
       localStorage.removeItem('token');
-      localStorage.removeItem('page'); 
-      this.getLoggedInfo.emit(null);    
+      localStorage.removeItem('page');
+      this.getLoggedInfo.emit(null);
       resolve();
     })
     return promise;
 
   }
-  getAccessToken()
-  {
+  getAccessToken() {
     //console.log(localStorage.getItem('token'));
     return localStorage.getItem('token');
   }
-  getCurrentUser() {    
+  getCurrentUser() {
     return this.http.get(`${uri}/auth/my-profile`).toPromise();
+  }
+  googleSignin(token: string) {
+    let body = { "token": token };
+    return this.http.post(`${uri}/auth/google-signin`, body);
   }
 }

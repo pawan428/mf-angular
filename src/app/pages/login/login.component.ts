@@ -5,27 +5,28 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Title } from '@angular/platform-browser';
 import { LoaderService } from 'src/app/shared/services/loader.service';
-import { User } from 'src/app/models/user';
-import { CustomValidatorService } from 'src/app/shared/validators/custom-validator.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UtilService } from 'src/app/shared/services/util.service';
-import { ResponseModel } from 'src/app/models/response';
 import { MessageService } from 'src/app/shared/services/message.service';
-import { error } from 'protractor';
+import { environment } from 'src/environments/environment';
+import { SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+ 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  auth2: any;
   submitted = false;
   returnUrl: string;
   loginForm: FormGroup;
   error: HttpErrorResponse;
 
+
   constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute,
     private authService: AuthService, private titleService: Title, private loaderService: LoaderService,
-    private messageService: MessageService
+    private messageService: MessageService,private socialAuthService: SocialAuthService
   ) { }
 
   ngOnInit() {
@@ -35,11 +36,27 @@ export class LoginComponent implements OnInit, OnDestroy {
       username: ['pawan@gmail.com', [Validators.required, Validators.email]],
       password: ['Pawan@123', Validators.required]
     });
+    this.socialAuthService.authState.subscribe((user) => {
+      // this.user = user;
+      // this.loggedIn = (user != null);
+      console.log('user',user);
+    });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
-
   }
   get f() {
     return this.loginForm.controls;
+  }
+
+  signInWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+ 
+  signInWithFB(): void {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+ 
+  signOut(): void {
+    this.socialAuthService.signOut();
   }
 
   onSubmit() {

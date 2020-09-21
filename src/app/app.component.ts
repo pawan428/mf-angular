@@ -24,6 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   authS: Subscription;
   msgS: Subscription;
   headerLoader = false;
+  price = 1234567.89000000000300;
 
   constructor(private router: Router, private authService: AuthService,
     private titleService: Title, private activatedRoute: ActivatedRoute,
