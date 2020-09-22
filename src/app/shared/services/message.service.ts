@@ -19,11 +19,11 @@ export class MessageService {
     let em: ResponseModel = error;
     if (error.ok) { // for success
       em.message = error.message;
-      // setTimeout(() => {
-      //   this.reset()
-      // }, 3000);
+      setTimeout(() => {
+        this.reset()
+      }, 3000);
     }
-    else { // for http error response
+    else { // for error 
       if (error.status === 0 || error.status === 500 || typeof error.error == "object") {
         em.message = "Internal Server Error"; //set common error
       }
@@ -33,6 +33,5 @@ export class MessageService {
     }
 
     this.globalMessage.next(em);
-    console.log(em);
   }
 }

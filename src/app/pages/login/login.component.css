@@ -55,21 +55,6 @@ a {
 	margin: 15px 0;
 }
 
-button {
-	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
-	color: #FFFFFF;
-	font-size: 12px;
-	font-weight: bold;
-	padding: 12px 45px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    margin:auto;
-    display: block;
-}
-
 form {
 	background-color: #FFFFFF;
 	align-items: center;
@@ -162,7 +147,8 @@ input {
 }
 
 .social-container a {
-	border: 1px solid #DDDDDD;
+	border: 1px solid ddd;
+	background-color: #eee;
 	border-radius: 50%;
 	display: inline-flex;
 	justify-content: center;
@@ -170,4 +156,17 @@ input {
 	margin: 0 5px;
 	height: 40px;
 	width: 40px;
+	font-weight: bold;
+    font-size: 19px;
+	font-family: system-ui;
+	cursor: pointer;
+	color:#333;
+	transition-property: background-color, color;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+}
+.social-container a:hover{
+	color:#fff;
+	text-decoration: none;
+	background-color:#FF4B2B
 }

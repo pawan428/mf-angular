@@ -1,12 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider,
-  AmazonLoginProvider,
-} from 'angularx-social-login';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -20,6 +14,27 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 import { UtilService } from './shared/services/util.service';
 import { HttpHeaderInterceptor } from './shared/interceptors/http-header.interceptor';
+import { SocialLoginModule } from 'angularx-social-login';
+import { AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider  } from 'angularx-social-login';
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('1019758367150-ob2rfobsijnurmrdf44ifghphg6flbo1.apps.googleusercontent.com')
+  },
+  // {
+  //   id: FacebookLoginProvider.PROVIDER_ID,
+  //   provider: new FacebookLoginProvider('561602290896109')
+  // },
+  // {
+  //   id: LinkedInLoginProvider.PROVIDER_ID,
+  //   provider: new LinkedInLoginProvider("78iqy5cu2e1fgr")
+  // }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 //NOTE: dont pass data if want to set it from child component elase if you passed it will show from app component setPageTitle()
 const routes: Routes = [
@@ -76,28 +91,8 @@ const routes: Routes = [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpHeaderInterceptor, multi: true },
     {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              '1019758367150-ob2rfobsijnurmrdf44ifghphg6flbo1.apps.googleusercontent.com'
-            ),
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('clientId'),
-          },
-          {
-            id: AmazonLoginProvider.PROVIDER_ID,
-            provider: new AmazonLoginProvider(
-              'clientId'
-            ),
-          },
-        ],
-      } as SocialAuthServiceConfig,
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
     }
   ],
   bootstrap: [AppComponent]

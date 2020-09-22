@@ -17,7 +17,8 @@ export class UsernameValidator {
     }
 
     checkAvailability(control: FormControl): any {
-
+if(!control.value)
+return null;
         clearTimeout(this.debouncer);
         let ref = this;
         return new Promise(resolve => {

@@ -9,8 +9,8 @@
                         <br>
                         <h5>Login to Mutual Fund</h5>
                         <div class="social-container">
-                            <a class="social" (cloick)="signInWithGoogle()"><img src="../../../assets/images/google.png"></a>
-                            <a href="#" class="social"><i class="fa fa-car"  aria-hidden="true"></i></a>
+                            <a class="social" title="google" (click)="signInWithGoogle()">G</a>
+                            <a title="facebook" class="social">f</a>
                         </div>
                         <span class="or" >or use your account</span>
                         <div class="form-group">
@@ -28,7 +28,7 @@
                                 Password is required
                             </span>
                         </div>
-                        <button type="submit">Login</button>
+                        <button type="submit" class="smart-button">Login</button>
 
                     </form>
                     <p>Not Registered? <a routerLink="/auth/signup">Create Account</a></p>

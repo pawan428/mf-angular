@@ -18,6 +18,7 @@ export class
   logout() {
     let promise = new Promise((resolve, reject) => {
       localStorage.removeItem('token');
+      localStorage.removeItem('google-token');
       localStorage.removeItem('page');
       this.getLoggedInfo.emit(null);
       resolve();
@@ -35,5 +36,9 @@ export class
   googleSignin(token: string) {
     let body = { "token": token };
     return this.http.post(`${uri}/auth/google-signin`, body);
+  }
+  getGoogleUserinfo(token: string) {
+    let body = { "token": token };
+    return this.http.post(`${uri}/auth/google-userinfo`, body);
   }
 }

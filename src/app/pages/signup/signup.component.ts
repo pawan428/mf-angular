@@ -7,6 +7,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { MessageService } from 'src/app/shared/services/message.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { ResponseModel } from 'src/app/models/response';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,6 +19,7 @@ import { ResponseModel } from 'src/app/models/response';
 export class SignupComponent {
   registerForm: FormGroup;
   submitted = false;
+  returnUrl;
   constructor(
     private fb: FormBuilder,
     private customValidator: CustomValidatorService,
@@ -24,16 +27,17 @@ export class SignupComponent {
     private titleService: Title,
     private userService: UserService,
     private messageService: MessageService,
-    private loader: LoaderService
-
+    private loader: LoaderService,
+    private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
     try {
       this.titleService.setTitle('Signup');
       this.registerForm = this.fb.group({
-        firstName: ['Pawan', Validators.required],
-        lastName: ['Sharma', Validators.required],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email],
           this.usernameValidator.checkAvailability.bind(this.usernameValidator)],
         password: ['Pawan@123', Validators.compose([Validators.required, this.customValidator.patternValidator()])],
@@ -45,6 +49,27 @@ export class SignupComponent {
       );
     } catch (err) {
       this.messageService.showMessage(err);
+    }
+    let token = localStorage.getItem("google-token");
+    if (token) {
+      this.authService.getGoogleUserinfo(token).subscribe(val => {
+        //console.log(val);
+
+
+        this.registerForm.patchValue({
+          "firstName": val["given_name"],
+          "lastName": val["family_name"],
+          "email": val["email"]
+        });
+        //this.registerForm.get("email").clearValidators();
+
+        //this.registerForm.get("email").updateValueAndValidity();
+
+      },
+        (error) => {
+          console.log(error);
+
+        });
     }
   }
   get f() {
@@ -58,12 +83,18 @@ export class SignupComponent {
       this.userService.postUser(this.registerForm.value).subscribe(res => {
         let msg: ResponseModel = { ok: res && res["auth"], message: '' }
         if (res && res["auth"]) {
-          msg.message = 'User Registration Successful';
+          msg.message = 'Registration Successful, Please login with your email and password.';
           this.registerForm.reset();
+          this.router.navigate(['/auth/login']);
+          // let token = localStorage.getItem("google-token");
+          // this.authService.googleSignin(token).subscribe(val => {
+          //   localStorage.setItem("token", token);
+          //   this.router.navigate(['/dashboard']);
+          // });
           this.submitted = false;
         }
         else
-          msg.message = 'User Registration Failed';
+          msg.message = 'Registration Failed';
         this.messageService.showMessage(msg);
         this.loader.hide();
       });
