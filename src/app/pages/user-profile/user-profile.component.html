@@ -3,8 +3,12 @@
         <div class="col-md-7">
             <div class="main-card mb-3 card">
                 <div class="card-body">
-                    <div class="rounded-text">{{user?.firstName.substring(0,1)}}</div>
+                    <div class="rounded-text">
+                        <app-profile-picture [currentUser]="user"></app-profile-picture>
+                    </div>
                     <h5 class="card-title">{{user?.firstName}} {{user?.lastName}}</h5>
+
+
                     <!-- <p><i class="pe-7s-call"></i>  {{user?.mobile}}</p> -->
                     <p> {{user?.email}}</p>
                     --create personal details entry form---

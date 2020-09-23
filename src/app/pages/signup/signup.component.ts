@@ -55,20 +55,16 @@ export class SignupComponent {
       this.authService.getGoogleUserinfo(token).subscribe(val => {
         //console.log(val);
 
-
+        console.log(val);
         this.registerForm.patchValue({
           "firstName": val["given_name"],
           "lastName": val["family_name"],
           "email": val["email"]
         });
-        //this.registerForm.get("email").clearValidators();
-
-        //this.registerForm.get("email").updateValueAndValidity();
-
+        this.registerForm.value.picture = val["picture"]; //adding new property
       },
         (error) => {
           console.log(error);
-
         });
     }
   }
@@ -79,6 +75,7 @@ export class SignupComponent {
   onSubmit() {
     this.submitted = true;
     if (this.registerForm.valid) {
+      console.log(this.registerForm.value);
       this.loader.showText('Processing...');
       this.userService.postUser(this.registerForm.value).subscribe(res => {
         let msg: ResponseModel = { ok: res && res["auth"], message: '' }

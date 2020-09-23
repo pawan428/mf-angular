@@ -6,21 +6,24 @@ import { PageTitleComponent } from '../components/_layout/page-title/page-title.
 import { FooterComponent } from '../components/_layout/footer/footer.component';
 import { SideNavComponent } from '../components/_layout/side-nav/side-nav.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from './shared.module';
 
 
 @NgModule({
   declarations: [HeaderComponent,
     PageTitleComponent,
     FooterComponent,
-    SideNavComponent
+    SideNavComponent,
   ],
   imports: [
     RouterModule,
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   exports: [HeaderComponent,
     PageTitleComponent,
     FooterComponent,
-    SideNavComponent]
+    SideNavComponent,
+  ]
 })
 export class LayoutModule { }
