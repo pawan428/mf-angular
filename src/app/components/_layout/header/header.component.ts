@@ -19,7 +19,10 @@ export class HeaderComponent implements OnInit {
   }
 
   async logout() {
-    this.socialAuthService.signOut();
+    this.socialAuthService.signOut().catch(error=>{
+      console.log(error);
+    });
+      
 
     await this.authService.logout().then(() => {
       this.router.navigate(['/home']);

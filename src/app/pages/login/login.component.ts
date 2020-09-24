@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -7,10 +7,9 @@ import { Title } from '@angular/platform-browser';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'src/app/shared/services/message.service';
-import { environment } from 'src/environments/environment';
 import { AuthService as SocialAuthService } from 'angularx-social-login';
-import { SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from 'angularx-social-login';
+import { MessageType } from 'src/app/models/response';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -43,6 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.authService.googleSignin(user.idToken).subscribe(val => {
         });
       }
+    },error=>{
+      console.log('qwqw',error);
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
@@ -85,7 +86,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   onSubmit() {
     try {
-      //JSON.parse('sa');
+     // JSON.parse('sa');
       this.submitted = true;
       if (this.loginForm.valid) {
         this.loaderService.showText('Validating...');
@@ -101,7 +102,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
       }
     } catch (error) {
-      this.messageService.showMessage({ ok: false, message: "Something went wrong!" });
+      this.messageService.showMessage("Something went wrong!",MessageType.error);
     }
   }
 

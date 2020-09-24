@@ -6,7 +6,6 @@ import { filter, map } from 'rxjs/operators';
 import { Page } from './models/page';
 import { MessageService } from './shared/services/message.service';
 import { ResponseModel } from './models/response';
-import { LoaderService } from './shared/services/loader.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -24,7 +23,6 @@ export class AppComponent implements OnInit, OnDestroy {
   authS: Subscription;
   msgS: Subscription;
   headerLoader = false;
-  price = 1234567.89000000000300;
 
   constructor(private router: Router, private authService: AuthService,
     private titleService: Title, private activatedRoute: ActivatedRoute,
@@ -98,6 +96,18 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
+  // aa() {
+  //   let d = document.querySelector("#dvMain");
+  //   let a = d.innerHTML;
+
+  //   let i = d.getElementsByTagName('img')[0];
+  //   console.log(i);
+  //   let p=d.textContent;
+  //   d.innerHTML='';
+  //   d.innerHTML="Pawan";
+  //   d.insertAdjacentHTML('afterbegin',i.innerHTML);
+
+  // }
   ngOnDestroy() {
 
   }

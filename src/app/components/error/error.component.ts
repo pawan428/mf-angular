@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { ResponseModel } from 'src/app/models/response';
+import { ResponseModel, MessageType } from 'src/app/models/response';
 import { MessageService } from 'src/app/shared/services/message.service';
 import { Subscription } from 'rxjs';
 
@@ -9,9 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./error.component.css'],
 })
 export class ErrorComponent implements OnInit, OnDestroy {
-  //@Input() globalMessage: ResponseModel;
-
-  globalMessage: ResponseModel
+  globalMessage: ResponseModel;   
   msgSubscription: Subscription;
   constructor(private msgService: MessageService) {
   }

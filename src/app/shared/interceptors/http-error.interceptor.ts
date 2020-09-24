@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { MessageService } from '../services/message.service';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { LoaderService } from '../services/loader.service';
+import { MessageType } from 'src/app/models/response';
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(private messageService: MessageService, private loader: LoaderService) { }
@@ -11,10 +12,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
     return next.handle(request)
       .pipe(
-        //retry(1),
         catchError((error: HttpErrorResponse) => {
-         this.messageService.showMessage(error);
-         this.loader.hide();
+          let errorMesage = typeof error.error === 'string' ? error.error : error.statusText;
+          this.messageService.showMessage(errorMesage, MessageType.error);
+          this.loader.hide();
           return throwError(error);
         })
       )

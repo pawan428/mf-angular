@@ -6,7 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { UserService } from 'src/app/shared/services/user.service';
 import { MessageService } from 'src/app/shared/services/message.service';
 import { LoaderService } from 'src/app/shared/services/loader.service';
-import { ResponseModel } from 'src/app/models/response';
+import { ResponseModel, MessageType } from 'src/app/models/response';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -48,7 +48,7 @@ export class SignupComponent {
         }
       );
     } catch (err) {
-      this.messageService.showMessage(err);
+      this.messageService.showMessage('error',err.message);
     }
     let token = localStorage.getItem("google-token");
     if (token) {
@@ -77,10 +77,10 @@ export class SignupComponent {
     if (this.registerForm.valid) {
       console.log(this.registerForm.value);
       this.loader.showText('Processing...');
+      let msg;
       this.userService.postUser(this.registerForm.value).subscribe(res => {
-        let msg: ResponseModel = { ok: res && res["auth"], message: '' }
         if (res && res["auth"]) {
-          msg.message = 'Registration Successful, Please login with your email and password.';
+          msg = 'Registration Successful, Please login with your email and password.';
           this.registerForm.reset();
           this.router.navigate(['/auth/login']);
           // let token = localStorage.getItem("google-token");
@@ -90,9 +90,10 @@ export class SignupComponent {
           // });
           this.submitted = false;
         }
-        else
-          msg.message = 'Registration Failed';
-        this.messageService.showMessage(msg);
+        else {
+          msg = 'Registration Failed';
+        }
+        this.messageService.showMessage(MessageType.error, msg);
         this.loader.hide();
       });
     }
