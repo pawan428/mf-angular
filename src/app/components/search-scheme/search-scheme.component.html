@@ -1,0 +1,17 @@
+<div class="search-wrapper" id="search-wrapper">
+  <div class="input-holder">
+    <input type="text" [formControl]="searchInput" class="search-input" placeholder="Type to search">
+    <button class="search-icon"><span></span></button>
+  </div>
+  <button class="close" (click)="closeSearch()"></button>
+  <div class="auto-bind" *ngIf="searchInput.value">
+    <div class="list-group">
+      <a *ngFor="let s of apiResponse" href="#"
+        class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <a (click)="closeSearch()" [routerLink]="['/scheme-details', s.schemeName|urlFriendly]">{{s.schemeName}}</a>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
