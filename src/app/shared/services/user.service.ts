@@ -22,4 +22,5 @@ export class UserService {
     postUser(user:User) {
        return this.http.post(`${uri}/auth/register`,user);
     }
+    
 }

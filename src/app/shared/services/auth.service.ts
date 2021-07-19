@@ -41,4 +41,8 @@ export class
     let body = { "token": token };
     return this.http.post(`${uri}/auth/google-userinfo`, body);
   }
+  changePassword(v: string) {
+    let body = { currentPassword: v["currentPassword"], newPassword: v["newPassword"] };
+    return this.http.post(`${uri}/auth/change-password`, body);
+  }
 }

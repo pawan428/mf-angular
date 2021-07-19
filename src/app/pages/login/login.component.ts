@@ -36,14 +36,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: ['', Validators.required]
     });
     //load username if have google token in localstorage
-    this.socialAuthService.authState.subscribe((user) => {      
+    this.socialAuthService.authState.subscribe((user) => {
       if (user) {
         this.loginForm.patchValue({ "username": user.email });
         this.authService.googleSignin(user.idToken).subscribe(val => {
         });
       }
-    },error=>{
-      console.log('qwqw',error);
+    }, error => {
+      console.log('error', error);
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
@@ -61,6 +61,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loaderService.showText('Checking session...');
         this.authService.googleSignin(user.idToken).subscribe(val => {
           this.loginSuccess(val["token"]);
+          this.loaderService.hide();
+
         },
           (error) => {
             //handle not registered user
@@ -86,7 +88,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   onSubmit() {
     try {
-     // JSON.parse('sa');
+      // JSON.parse('sa');
       this.submitted = true;
       if (this.loginForm.valid) {
         this.loaderService.showText('Validating...');
@@ -102,7 +104,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
       }
     } catch (error) {
-      this.messageService.showMessage("Something went wrong!",MessageType.error);
+      this.messageService.showMessage("Something went wrong!", MessageType.error);
     }
   }
 
